@@ -1,4 +1,4 @@
-package com.project.DASBackend.DTO;
+package com.project.DASBackend.dto;
 
 import lombok.*;
 
@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @Builder
-public class AccountDTO {
-    private int AccountId;
+public class AccountDto {
+    private Integer AccountId;
     private String email;
     private String firstName;
     private String lastName;
@@ -19,6 +19,6 @@ public class AccountDTO {
     private String googleAccessToken;
     private String refreshToken;
     private LocalDateTime accessTokenExpiryTime;
-    private int accountStatus;
-    private int role;
+    private Integer accountStatus;
+    private Integer role;
 }

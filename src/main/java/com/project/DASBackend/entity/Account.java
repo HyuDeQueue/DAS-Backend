@@ -1,4 +1,4 @@
-package com.project.DASBackend.Entity;
+package com.project.DASBackend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,7 +18,7 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Account_Id")
-    private int AccountId;
+    private Integer AccountId;
 
     @Column(name = "Email", unique = true, nullable = false)
     private String email;
@@ -42,8 +42,8 @@ public class Account {
     private LocalDateTime accessTokenExpiryTime;
 
     @Column(name = "Account_status", nullable = false)
-    private int accountStatus;
+    private Integer accountStatus;
 
     @Column(name = "Role", nullable = false)
-    private int role;
+    private Integer role;
 }

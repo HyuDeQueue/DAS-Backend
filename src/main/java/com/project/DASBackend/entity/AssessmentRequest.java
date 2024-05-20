@@ -1,4 +1,4 @@
-package com.project.DASBackend.Entity;
+package com.project.DASBackend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,13 +18,13 @@ public class AssessmentRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Request_Id")
-    private int requestId;
+    private Integer requestId;
 
     @Column(name = "Phone", nullable = false)
     private String phone;
 
     @Column(name = "Number_of_diamonds", nullable = false)
-    private int numberOfDiamonds;
+    private Integer numberOfDiamonds;
 
     @Column(name = "Date_created", nullable = false)
     private LocalDateTime dateCreated;

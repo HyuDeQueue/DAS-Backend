@@ -1,4 +1,4 @@
-package com.project.DASBackend.Entity;
+package com.project.DASBackend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,10 +17,10 @@ public class AssessmentBooking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Booking_Id")
-    private int bookingId;
+    private Integer bookingId;
 
     @Column(name = "total_price", nullable = false)
-    private int totalPrice;
+    private Integer totalPrice;
 
     @Column(name = "Created_date", nullable = false)
     private LocalDateTime createdDate;
@@ -29,16 +29,16 @@ public class AssessmentBooking {
     private LocalDateTime diamondReturnDate;
 
     @Column(name = "status", nullable = false)
-    private int status;
+    private Integer status;
 
     @Column(name = "Payment_type", nullable = false)
-    private int paymentType;
+    private Integer paymentType;
 
     @Column(name = "Payment_status", nullable = false)
-    private int paymentStatus;
+    private Integer paymentStatus;
 
     @Column(name = "Date_Modified", nullable = false)
-    private int dateModified;
+    private Integer dateModified;
 
     @ManyToOne
     @JoinColumn(name = "Account_Id", nullable = false)

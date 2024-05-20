@@ -1,4 +1,4 @@
-package com.project.DASBackend.Entity;
+package com.project.DASBackend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,7 +15,7 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Service_Id")
-    private int serviceId;
+    private Integer serviceId;
 
     @Column(name = "Service_name", nullable = false)
     private String serviceName;
@@ -24,8 +24,8 @@ public class Service {
     private String serviceDescription;
 
     @Column(name = "Service_price", nullable = false)
-    private int servicePrice;
+    private Integer servicePrice;
 
     @Column(name = "Service_status", nullable = false)
-    private int serviceStatus;
+    private Integer serviceStatus;
 }

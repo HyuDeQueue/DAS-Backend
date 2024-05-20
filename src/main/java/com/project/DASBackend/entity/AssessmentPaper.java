@@ -1,4 +1,4 @@
-package com.project.DASBackend.Entity;
+package com.project.DASBackend.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,7 +17,7 @@ public class AssessmentPaper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Diamond_Id")
-    private int diamondId;
+    private Integer diamondId;
 
     @Column(name = "Type", nullable = false)
     private String type;
@@ -41,7 +41,7 @@ public class AssessmentPaper {
     private String symmetry;
 
     @Column(name = "Flourescence", nullable = false)
-    private String fluorescence;
+    private String flourescence;
 
     @Column(name = "Weight", nullable = false)
     private float weight;
@@ -82,7 +82,10 @@ public class AssessmentPaper {
     @Column(name = "Symmetry_Grade", nullable = false)
     private float symmetryGrade;
 
-    @Column(name = "Seal_Id", unique = true)
+    @Column(name = "Feedback")
+    private String feedback;
+
+    @Column(name = "Seal_Id", unique = true, nullable = false)
     private Integer sealId;
 
     @ManyToOne

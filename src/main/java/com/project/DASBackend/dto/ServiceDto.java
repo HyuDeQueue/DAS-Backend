@@ -1,4 +1,4 @@
-package com.project.DASBackend.DTO;
+package com.project.DASBackend.dto;
 
 import lombok.*;
 
@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 @Builder
-public class ServiceDTO {
+public class ServiceDto {
     private Integer serviceId;
     private String serviceName;
     private String serviceDescription;

@@ -1,4 +1,4 @@
-package com.project.DASBackend.DTO;
+package com.project.DASBackend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,13 +11,13 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AssessmentRequestDTO {
-    private int requestId;
+public class AssessmentRequestDto {
+    private Integer requestId;
     private String phone;
-    private int numberOfDiamonds;
+    private Integer numberOfDiamonds;
     private LocalDateTime dateCreated;
     private LocalDateTime meetingDate;
     private String address;
-    private int accountId;
-    private int serviceId;
+    private Integer accountId;
+    private Integer serviceId;
 }
