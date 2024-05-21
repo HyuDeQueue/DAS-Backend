@@ -1,45 +1,40 @@
 package com.project.DASBackend.mapper;
 
 import com.project.DASBackend.dto.AssessmentRequestDto;
+import com.project.DASBackend.entity.Account;
 import com.project.DASBackend.entity.AssessmentRequest;
+import com.project.DASBackend.entity.Service;
 
 public class AssessmentRequestMapper {
     public static AssessmentRequestDto toDto(AssessmentRequest request) {
         if (request == null) {
             return null;
         }
-
-        AssessmentRequestDto dto = new AssessmentRequestDto();
-        dto.setRequestId(request.getRequestId());
-        dto.setAddress(request.getAddress());
-        dto.setDateCreated(request.getDateCreated());
-        dto.setMeetingDate(request.getMeetingDate());
-        dto.setNumberOfDiamonds(request.getNumberOfDiamonds());
-        dto.setPhone(request.getPhone());
-        dto.setAccountId(request.getAccount().getAccountId());
-        dto.setServiceId(request.getService().getServiceId());
-
-        return dto;
+        return new AssessmentRequestDto(
+                request.getRequestId(),
+                request.getPhone(),
+                request.getNumberOfDiamonds(),
+                request.getDateCreated(),
+                request.getMeetingDate(),
+                request.getAddress(),
+                request.getAccount().getAccountId(),
+                request.getService().getServiceId()
+        );
     }
 
-    public static AssessmentRequest toEntity(AssessmentRequestDto dto) {
-        if (dto == null) {
+    public static AssessmentRequest toEntity(AssessmentRequestDto requestDto, Account account, Service service) {
+        if (requestDto == null) {
             return null;
         }
-
         AssessmentRequest request = new AssessmentRequest();
-        request.setRequestId(dto.getRequestId());
-        request.setAddress(dto.getAddress());
-        request.setDateCreated(dto.getDateCreated());
-        request.setMeetingDate(dto.getMeetingDate());
-        request.setNumberOfDiamonds(dto.getNumberOfDiamonds());
-        request.setPhone(dto.getPhone());
-
-        // You need to set the account and service entities separately.
-        // Assuming you have a method to fetch these entities:
-        // request.setAccount(accountService.findById(dto.getAccountId()));
-        // request.setService(serviceService.findById(dto.getServiceId()));
-
+        request.setRequestId(requestDto.getRequestId());
+        request.setPhone(requestDto.getPhone());
+        request.setNumberOfDiamonds(requestDto.getNumberOfDiamonds());
+        request.setDateCreated(requestDto.getDateCreated());
+        request.setMeetingDate(requestDto.getMeetingDate());
+        request.setAddress(requestDto.getAddress());
+        request.setAccount(account);
+        request.setService(service);
         return request;
     }
 }

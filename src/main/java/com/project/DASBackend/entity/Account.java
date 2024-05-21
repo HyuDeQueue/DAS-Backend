@@ -18,9 +18,9 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Account_Id")
-    private Integer AccountId;
+    private Integer accountId;
 
-    @Column(name = "Email", unique = true, nullable = false)
+    @Column(name = "Email", nullable = false)
     private String email;
 
     @Column(name = "First_Name", nullable = false)
@@ -46,4 +46,5 @@ public class Account {
 
     @Column(name = "Role", nullable = false)
     private Integer role;
+
 }

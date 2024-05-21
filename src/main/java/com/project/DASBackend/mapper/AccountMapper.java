@@ -8,39 +8,35 @@ public class AccountMapper {
         if (account == null) {
             return null;
         }
-
-        AccountDto dto = new AccountDto();
-        dto.setAccountId(account.getAccountId());
-        dto.setAccessTokenExpiryTime(account.getAccessTokenExpiryTime());
-        dto.setAccountStatus(account.getAccountStatus());
-        dto.setEmail(account.getEmail());
-        dto.setFirstName(account.getFirstName());
-        dto.setGoogleAccessToken(account.getGoogleAccessToken());
-        dto.setIdentityNum(account.getIdentityNum());
-        dto.setLastName(account.getLastName());
-        dto.setRefreshToken(account.getRefreshToken());
-        dto.setRole(account.getRole());
-
-        return dto;
+        return new AccountDto(
+                account.getAccountId(),
+                account.getEmail(),
+                account.getFirstName(),
+                account.getLastName(),
+                account.getIdentityNum(),
+                account.getGoogleAccessToken(),
+                account.getRefreshToken(),
+                account.getAccessTokenExpiryTime(),
+                account.getAccountStatus(),
+                account.getRole()
+        );
     }
 
-    public static Account toEntity(AccountDto dto) {
-        if (dto == null) {
+    public static Account toEntity(AccountDto accountDto) {
+        if (accountDto == null) {
             return null;
         }
-
         Account account = new Account();
-        account.setAccountId(dto.getAccountId());
-        account.setAccessTokenExpiryTime(dto.getAccessTokenExpiryTime());
-        account.setAccountStatus(dto.getAccountStatus());
-        account.setEmail(dto.getEmail());
-        account.setFirstName(dto.getFirstName());
-        account.setGoogleAccessToken(dto.getGoogleAccessToken());
-        account.setIdentityNum(dto.getIdentityNum());
-        account.setLastName(dto.getLastName());
-        account.setRefreshToken(dto.getRefreshToken());
-        account.setRole(dto.getRole());
-
+        account.setAccountId(accountDto.getAccountId());
+        account.setEmail(accountDto.getEmail());
+        account.setFirstName(accountDto.getFirstName());
+        account.setLastName(accountDto.getLastName());
+        account.setIdentityNum(accountDto.getIdentityNum());
+        account.setGoogleAccessToken(accountDto.getGoogleAccessToken());
+        account.setRefreshToken(accountDto.getRefreshToken());
+        account.setAccessTokenExpiryTime(accountDto.getAccessTokenExpiryTime());
+        account.setAccountStatus(accountDto.getAccountStatus());
+        account.setRole(accountDto.getRole());
         return account;
     }
 }

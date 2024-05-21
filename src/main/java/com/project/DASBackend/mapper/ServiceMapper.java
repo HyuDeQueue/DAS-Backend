@@ -8,29 +8,25 @@ public class ServiceMapper {
         if (service == null) {
             return null;
         }
-
-        ServiceDto dto = new ServiceDto();
-        dto.setServiceId(service.getServiceId());
-        dto.setServiceDescription(service.getServiceDescription());
-        dto.setServiceName(service.getServiceName());
-        dto.setServicePrice(service.getServicePrice());
-        dto.setServiceStatus(service.getServiceStatus());
-
-        return dto;
+        return new ServiceDto(
+                service.getServiceId(),
+                service.getServiceName(),
+                service.getServiceDescription(),
+                service.getServicePrice(),
+                service.getServiceStatus()
+        );
     }
 
-    public static Service toEntity(ServiceDto dto) {
-        if (dto == null) {
+    public static Service toEntity(ServiceDto serviceDto) {
+        if (serviceDto == null) {
             return null;
         }
-
         Service service = new Service();
-        service.setServiceId(dto.getServiceId());
-        service.setServiceDescription(dto.getServiceDescription());
-        service.setServiceName(dto.getServiceName());
-        service.setServicePrice(dto.getServicePrice());
-        service.setServiceStatus(dto.getServiceStatus());
-
+        service.setServiceId(serviceDto.getServiceId());
+        service.setServiceName(serviceDto.getServiceName());
+        service.setServiceDescription(serviceDto.getServiceDescription());
+        service.setServicePrice(serviceDto.getServicePrice());
+        service.setServiceStatus(serviceDto.getServiceStatus());
         return service;
     }
 }

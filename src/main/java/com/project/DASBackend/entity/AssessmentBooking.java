@@ -22,8 +22,8 @@ public class AssessmentBooking {
     @Column(name = "total_price", nullable = false)
     private Integer totalPrice;
 
-    @Column(name = "Created_date", nullable = false)
-    private LocalDateTime createdDate;
+    @Column(name = "Date_Created", nullable = false)
+    private LocalDateTime dateCreated;
 
     @Column(name = "Diamond_return_date", nullable = false)
     private LocalDateTime diamondReturnDate;
@@ -37,8 +37,8 @@ public class AssessmentBooking {
     @Column(name = "Payment_status", nullable = false)
     private Integer paymentStatus;
 
-    @Column(name = "Date_Modified", nullable = false)
-    private Integer dateModified;
+    @Column(name = "Feedback")
+    private String feedback;
 
     @ManyToOne
     @JoinColumn(name = "Account_Id", nullable = false)
@@ -46,7 +46,7 @@ public class AssessmentBooking {
 
     @ManyToOne
     @JoinColumn(name = "Request_Id", nullable = false)
-    private AssessmentRequest assessmentRequest;
+    private AssessmentRequest request;
 
     @ManyToOne
     @JoinColumn(name = "Service_Id", nullable = false)

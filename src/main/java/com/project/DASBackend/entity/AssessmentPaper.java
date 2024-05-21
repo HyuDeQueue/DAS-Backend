@@ -23,13 +23,13 @@ public class AssessmentPaper {
     private String type;
 
     @Column(name = "Size", nullable = false)
-    private float size;
+    private Float size;
 
     @Column(name = "Shape", nullable = false)
     private String shape;
 
     @Column(name = "Color", nullable = false)
-    private char color;
+    private String color;
 
     @Column(name = "Clarity", nullable = false)
     private String clarity;
@@ -40,11 +40,11 @@ public class AssessmentPaper {
     @Column(name = "Symmetry", nullable = false)
     private String symmetry;
 
-    @Column(name = "Flourescence", nullable = false)
-    private String flourescence;
+    @Column(name = "Fluorescence", nullable = false)
+    private String fluorescence;
 
     @Column(name = "Weight", nullable = false)
-    private float weight;
+    private Float weight;
 
     @Column(name = "Comments")
     private String comments;
@@ -53,46 +53,43 @@ public class AssessmentPaper {
     private LocalDateTime dateCreated;
 
     @Column(name = "Table_Percentage", nullable = false)
-    private float tablePercentage;
+    private Float tablePercentage;
 
     @Column(name = "Depth_Percentage", nullable = false)
-    private float depthPercentage;
+    private Float depthPercentage;
 
     @Column(name = "Crown_Angle", nullable = false)
-    private float crownAngle;
+    private Float crownAngle;
 
     @Column(name = "Pavilion_Angle", nullable = false)
-    private float pavilionAngle;
+    private Float pavilionAngle;
 
     @Column(name = "Girdle_Thickness", nullable = false)
     private String girdleThickness;
 
     @Column(name = "Culet_Size", nullable = false)
-    private float culetSize;
+    private Float culetSize;
 
     @Column(name = "Total_Depth", nullable = false)
-    private float totalDepth;
+    private Float totalDepth;
 
     @Column(name = "Crown_Height", nullable = false)
-    private float crownHeight;
+    private Float crownHeight;
 
     @Column(name = "Pavilion_Depth", nullable = false)
-    private float pavilionDepth;
+    private Float pavilionDepth;
 
     @Column(name = "Symmetry_Grade", nullable = false)
-    private float symmetryGrade;
+    private Float symmetryGrade;
 
-    @Column(name = "Feedback")
-    private String feedback;
-
-    @Column(name = "Seal_Id", unique = true, nullable = false)
+    @Column(name = "Seal_Id", unique = true)
     private Integer sealId;
-
-    @ManyToOne
-    @JoinColumn(name = "Booking_Id", nullable = false)
-    private AssessmentBooking assessmentBooking;
 
     @ManyToOne
     @JoinColumn(name = "Account_Id", nullable = false)
     private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "Detail_Id", nullable = false)
+    private BookingDetail detail;
 }

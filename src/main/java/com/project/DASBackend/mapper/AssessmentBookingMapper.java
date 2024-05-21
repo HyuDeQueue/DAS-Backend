@@ -1,51 +1,47 @@
 package com.project.DASBackend.mapper;
 
 import com.project.DASBackend.dto.AssessmentBookingDto;
+import com.project.DASBackend.entity.Account;
 import com.project.DASBackend.entity.AssessmentBooking;
+import com.project.DASBackend.entity.AssessmentRequest;
+import com.project.DASBackend.entity.Service;
 
 public class AssessmentBookingMapper {
     public static AssessmentBookingDto toDto(AssessmentBooking booking) {
         if (booking == null) {
             return null;
         }
-
-        AssessmentBookingDto dto = new AssessmentBookingDto();
-        dto.setBookingId(booking.getBookingId());
-        dto.setCreatedDate(booking.getCreatedDate());
-        dto.setDateModified(booking.getDateModified());
-        dto.setDiamondReturnDate(booking.getDiamondReturnDate());
-        dto.setPaymentStatus(booking.getPaymentStatus());
-        dto.setPaymentType(booking.getPaymentType());
-        dto.setStatus(booking.getStatus());
-        dto.setTotalPrice(booking.getTotalPrice());
-        dto.setAccountId(booking.getAccount().getAccountId());
-        dto.setRequestId(booking.getAssessmentRequest().getRequestId());
-        dto.setServiceId(booking.getService().getServiceId());
-
-        return dto;
+        return new AssessmentBookingDto(
+                booking.getBookingId(),
+                booking.getTotalPrice(),
+                booking.getDateCreated(),
+                booking.getDiamondReturnDate(),
+                booking.getStatus(),
+                booking.getPaymentType(),
+                booking.getPaymentStatus(),
+                booking.getFeedback(),
+                booking.getAccount().getAccountId(),
+                booking.getRequest().getRequestId(),
+                booking.getService().getServiceId()
+        );
     }
 
-    public static AssessmentBooking toEntity(AssessmentBookingDto dto) {
-        if (dto == null) {
+    public static AssessmentBooking toEntity(AssessmentBookingDto bookingDto, Account account, AssessmentRequest request, Service service) {
+        if (bookingDto == null) {
             return null;
         }
-
         AssessmentBooking booking = new AssessmentBooking();
-        booking.setBookingId(dto.getBookingId());
-        booking.setCreatedDate(dto.getCreatedDate());
-        booking.setDateModified(dto.getDateModified());
-        booking.setDiamondReturnDate(dto.getDiamondReturnDate());
-        booking.setPaymentStatus(dto.getPaymentStatus());
-        booking.setPaymentType(dto.getPaymentType());
-        booking.setStatus(dto.getStatus());
-        booking.setTotalPrice(dto.getTotalPrice());
-
-        // You need to set the account, request, and service entities separately.
-        // Assuming you have a method to fetch these entities:
-        // booking.setAccount(accountService.findById(dto.getAccountId()));
-        // booking.setRequest(requestService.findById(dto.getRequestId()));
-        // booking.setService(serviceService.findById(dto.getServiceId()));
-
+        booking.setBookingId(bookingDto.getBookingId());
+        booking.setTotalPrice(bookingDto.getTotalPrice());
+        booking.setDateCreated(bookingDto.getDateCreated());
+        booking.setDiamondReturnDate(bookingDto.getDiamondReturnDate());
+        booking.setStatus(bookingDto.getStatus());
+        booking.setPaymentType(bookingDto.getPaymentType());
+        booking.setPaymentStatus(bookingDto.getPaymentStatus());
+        booking.setFeedback(bookingDto.getFeedback());
+        booking.setAccount(account);
+        booking.setRequest(request);
+        booking.setService(service);
         return booking;
     }
 }

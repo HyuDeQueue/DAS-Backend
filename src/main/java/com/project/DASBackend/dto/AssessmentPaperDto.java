@@ -1,9 +1,6 @@
 package com.project.DASBackend.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -11,32 +8,33 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@Data
 public class AssessmentPaperDto {
     private Integer diamondId;
     private String type;
-    private float size;
+    private Float size;
     private String shape;
-    private char color;
+    private String color;
     private String clarity;
     private String polish;
     private String symmetry;
-    private String flourescence;
-    private float weight;
+    private String fluorescence;
+    private Float weight;
     private String comments;
     private LocalDateTime dateCreated;
-    private float tablePercentage;
-    private float depthPercentage;
-    private float crownAngle;
-    private float pavilionAngle;
+    private Float tablePercentage;
+    private Float depthPercentage;
+    private Float crownAngle;
+    private Float pavilionAngle;
     private String girdleThickness;
-    private float culetSize;
-    private float totalDepth;
-    private float crownHeight;
-    private float pavilionDepth;
-    private float symmetryGrade;
-    private String feedback;
+    private Float culetSize;
+    private Float totalDepth;
+    private Float crownHeight;
+    private Float pavilionDepth;
+    private Float symmetryGrade;
     private Integer sealId;
-    private Integer bookingId;
     private Integer accountId;
+    private Integer detailId;
 
 }
