@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class AccountDto {
-    private Integer AccountId;
+    private Integer accountId;
     private String email;
     private String firstName;
     private String lastName;
