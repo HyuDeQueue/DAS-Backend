@@ -20,7 +20,7 @@ public class Account {
     @Column(name = "Account_Id")
     private Integer accountId;
 
-    @Column(name = "Email", nullable = false)
+    @Column(name = "Email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "First_Name", nullable = false)

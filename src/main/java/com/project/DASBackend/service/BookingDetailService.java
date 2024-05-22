@@ -1,4 +1,4 @@
 package com.project.DASBackend.service;
 
-public class BookingDetailService {
+public interface BookingDetailService {
 }
