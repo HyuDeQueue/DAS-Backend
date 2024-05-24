@@ -2,14 +2,15 @@ package com.project.DASBackend.controller;
 
 import com.project.DASBackend.dto.AccountDto;
 import com.project.DASBackend.service.AccountService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/accounts")
 public class AccountController {
@@ -17,18 +18,31 @@ public class AccountController {
     @Autowired
     private AccountService accountService;
 
-    @PostMapping("/google")
-    public AccountDto registerOrLoginWithGoogle(@RequestBody AccountDto accountDto) {
-        return accountService.registerOrLoginWithGoogle(accountDto);
+    @PostMapping
+    public ResponseEntity<AccountDto> createAccount(AccountDto accountDto){
+        return new ResponseEntity<>(accountService.createAccount(accountDto), HttpStatus.CREATED);
+    }
+    @GetMapping("{id}")
+    public ResponseEntity<AccountDto> getAccountById(@PathVariable("id") Integer accountId){
+        AccountDto accountDto = accountService.getAccountById(accountId);
+        return ResponseEntity.ok(accountDto);
     }
 
-    @PostMapping("/refresh-token")
-    public ResponseEntity<AccountDto> refreshAccessToken(@RequestBody String refreshToken) {
-        AccountDto accountDto = accountService.refreshAccessToken(refreshToken);
-        if (accountDto != null) {
-            return ResponseEntity.ok(accountDto);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+    @GetMapping
+    public ResponseEntity<List<AccountDto>> getAllAccounts(){
+        List<AccountDto> accountDtos = accountService.getAllAccounts();
+        return ResponseEntity.ok(accountDtos);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<AccountDto> updateAccount(@RequestBody AccountDto accountDto,
+                                                    @PathVariable("id") Integer accountId){
+        return ResponseEntity.ok(accountService.updateAccount(accountDto, accountId));
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteAccount(@PathVariable("id") Integer accountId){
+        accountService.deleteAccount(accountId);
+        return ResponseEntity.ok("Employee deleted successfully");
     }
 }

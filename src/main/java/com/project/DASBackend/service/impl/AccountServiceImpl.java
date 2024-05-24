@@ -2,16 +2,18 @@ package com.project.DASBackend.service.impl;
 
 import com.project.DASBackend.dto.AccountDto;
 import com.project.DASBackend.entity.Account;
+import com.project.DASBackend.exception.ResourceNotFoundException;
 import com.project.DASBackend.mapper.AccountMapper;
 import com.project.DASBackend.repository.AccountRepository;
 import com.project.DASBackend.service.AccountService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.List;
+import java.util.stream.Collectors;
 
+@AllArgsConstructor
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -19,48 +21,52 @@ public class AccountServiceImpl implements AccountService {
     private AccountRepository accountRepository;
 
     @Override
-    public AccountDto registerOrLoginWithGoogle(AccountDto accountDto) {
-        Optional<Account> existingAccount = accountRepository.findByEmail(accountDto.getEmail());
-
-        if (existingAccount.isPresent()) {
-            Account account = existingAccount.get();
-            account.setGoogleAccessToken(accountDto.getGoogleAccessToken());
-            account.setRefreshToken(generateRefreshToken());
-            account.setAccessTokenExpiryTime(accountDto.getAccessTokenExpiryTime());
-            accountRepository.save(account);
-            return AccountMapper.toDto(account);
-        } else {
-            Account newAccount = AccountMapper.toEntity(accountDto);
-            newAccount.setAccountStatus(1);
-            newAccount.setRole(1);
-            newAccount.setRefreshToken(generateRefreshToken());
-            accountRepository.save(newAccount);
-            return AccountMapper.toDto(newAccount);
-        }
+    public AccountDto createAccount(AccountDto accountDto) {
+        Account account = AccountMapper.toEntity(accountDto);
+        Account savedAccount = accountRepository.save(account);
+        return AccountMapper.toDto(savedAccount);
     }
 
     @Override
-    public AccountDto refreshAccessToken(String refreshToken) {
-        Optional<Account> accountOptional = accountRepository.findByRefreshToken(refreshToken);
+    public AccountDto getAccountById(Integer accountId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Account is not exist with given Id: " + accountId));
 
-        if (accountOptional.isPresent()) {
-            Account account = accountOptional.get();
-            String newAccessToken = generateNewAccessToken();
-            account.setGoogleAccessToken(newAccessToken);
-            account.setAccessTokenExpiryTime(LocalDateTime.now().plusHours(2));
-            accountRepository.save(account);
-            return AccountMapper.toDto(account);
-        } else {
-            return null;
-        }
+        return AccountMapper.toDto(account);
     }
 
-    private String generateRefreshToken() {
-        return UUID.randomUUID().toString();
+    @Override
+    public List<AccountDto> getAllAccounts() {
+        List<Account> accounts = accountRepository.findAll();
+        return accounts.stream().map((account -> AccountMapper.toDto(account)))
+                .collect(Collectors.toList());
     }
 
-    private String generateNewAccessToken() {
-        return UUID.randomUUID().toString();
+    @Override
+    public AccountDto updateAccount(AccountDto updatedAccountDto, Integer accountId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Account is not exist with given Id: " + accountId));
+
+        account.setEmail(updatedAccountDto.getEmail());
+        account.setFirstName(updatedAccountDto.getFirstName());
+        account.setLastName(updatedAccountDto.getLastName());
+        account.setIdentityNum(updatedAccountDto.getIdentityNum());
+        account.setGoogleAccessToken(updatedAccountDto.getGoogleAccessToken());
+        account.setRefreshToken(updatedAccountDto.getRefreshToken());
+        account.setAccessTokenExpiryTime(updatedAccountDto.getAccessTokenExpiryTime());
+        account.setAccountStatus(updatedAccountDto.getAccountStatus());
+        account.setRole(updatedAccountDto.getRole());
+        Account updatedAccount = accountRepository.save(account);
+        return AccountMapper.toDto(updatedAccount);
     }
 
+    @Override
+    public void deleteAccount(Integer accountId) {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Account is not exist with given Id: " + accountId));
+        accountRepository.deleteById(accountId);
+    }
 }
