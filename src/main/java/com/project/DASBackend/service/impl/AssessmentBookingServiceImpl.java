@@ -96,6 +96,6 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
         AssessmentBooking assessmentBooking = assessmentBookingRepository.findById(bookingId)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Assessment booking not found with given Id: " + bookingId));
-        assessmentBookingRepository.delete(assessmentBooking);
+        assessmentBookingRepository.deleteById(bookingId);
     }
 }

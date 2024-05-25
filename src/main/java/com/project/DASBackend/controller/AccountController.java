@@ -22,6 +22,7 @@ public class AccountController {
     public ResponseEntity<AccountDto> createAccount(AccountDto accountDto){
         return new ResponseEntity<>(accountService.createAccount(accountDto), HttpStatus.CREATED);
     }
+
     @GetMapping("{id}")
     public ResponseEntity<AccountDto> getAccountById(@PathVariable("id") Integer accountId){
         AccountDto accountDto = accountService.getAccountById(accountId);
