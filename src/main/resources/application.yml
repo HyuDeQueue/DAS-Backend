@@ -1,15 +1,13 @@
-## src/main/resources/application.yml
-#spring:
-#  security:
-#    oauth2:
-#      client:
-#        registration:
-#          google:
-#            client-id: 200707558272-9927kf04ck9vknkvrsbta2c0l9dkvtqi.apps.googleusercontent.com
-#            client-secret: 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
-#            scope: profile, email
-#        provider:
-#          google:
-#            authorization-uri: https://accounts.google.com/o/oauth2/auth
-#            token-uri: https://oauth2.googleapis.com/token
-#            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+# src/main/resources/application.yml
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 200707558272-te7t2gl0frolmfep3rolgc1l8k71drgb.apps.googleusercontent.com
+            client-secret: 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
+            redirectUri: {baseurl}/oauth2/callback/{registrationId}
+            scope:
+              - email
+              - profile
