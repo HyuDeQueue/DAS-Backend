@@ -21,8 +21,8 @@ public class AssessmentRequestController {
         return new ResponseEntity<>(assessmentRequestService.createAssessmentRequest(assessmentRequestDto), HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public ResponseEntity<AssessmentRequestDto> getAssessmentRequestById(Integer requestId) {
+    @GetMapping("{id}")
+    public ResponseEntity<AssessmentRequestDto> getAssessmentRequestById( @PathVariable("id") Integer requestId) {
         return new ResponseEntity<>(assessmentRequestService.getAssessmentRequestById(requestId), HttpStatus.OK);
     }
 
