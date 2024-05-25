@@ -33,6 +33,9 @@ public class AssessmentPaperDto {
     private Float crownHeight;
     private Float pavilionDepth;
     private Float symmetryGrade;
+    private String crossSection;
+    private String longitudinalSection;
+    private String transverseSection;
     private Integer sealId;
     private Integer accountId;
     private Integer detailId;
