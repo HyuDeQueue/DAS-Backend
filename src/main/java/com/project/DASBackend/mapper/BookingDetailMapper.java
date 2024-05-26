@@ -26,4 +26,12 @@ public class BookingDetailMapper {
         detail.setBooking(booking);
         return detail;
     }
+
+    public static void updateEntityFromDto(BookingDetailDto detailDto, BookingDetail detail, AssessmentBooking booking) {
+        if (detailDto == null) {
+            return;
+        }
+        detail.setStatus(detailDto.getStatus());
+        detail.setBooking(booking);
+    }
 }
