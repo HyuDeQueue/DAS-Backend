@@ -1,10 +1,11 @@
 package com.project.DASBackend.mapper;
 
 import com.project.DASBackend.dto.ServiceDto;
-import com.project.DASBackend.entity.Service;
+import com.project.DASBackend.entity.Services;
+import com.project.DASBackend.entity.Services;
 
 public class ServiceMapper {
-    public static ServiceDto toDto(Service service) {
+    public static ServiceDto toDto(Services service) {
         if (service == null) {
             return null;
         }
@@ -17,11 +18,11 @@ public class ServiceMapper {
         );
     }
 
-    public static Service toEntity(ServiceDto serviceDto) {
+    public static Services toEntity(ServiceDto serviceDto) {
         if (serviceDto == null) {
             return null;
         }
-        Service service = new Service();
+        Services service = new Services();
         service.setServiceId(serviceDto.getServiceId());
         service.setServiceName(serviceDto.getServiceName());
         service.setServiceDescription(serviceDto.getServiceDescription());

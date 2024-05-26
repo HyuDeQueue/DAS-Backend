@@ -4,7 +4,7 @@ import com.project.DASBackend.dto.AssessmentBookingDto;
 import com.project.DASBackend.entity.Account;
 import com.project.DASBackend.entity.AssessmentBooking;
 import com.project.DASBackend.entity.AssessmentRequest;
-import com.project.DASBackend.entity.Service;
+import com.project.DASBackend.entity.Services;
 
 public class AssessmentBookingMapper {
     public static AssessmentBookingDto toDto(AssessmentBooking booking) {
@@ -26,7 +26,7 @@ public class AssessmentBookingMapper {
         );
     }
 
-    public static AssessmentBooking toEntity(AssessmentBookingDto bookingDto, Account account, AssessmentRequest request, Service service) {
+    public static AssessmentBooking toEntity(AssessmentBookingDto bookingDto, Account account, AssessmentRequest request, Services service) {
         if (bookingDto == null) {
             return null;
         }

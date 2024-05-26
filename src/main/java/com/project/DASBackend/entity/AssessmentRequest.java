@@ -41,5 +41,5 @@ public class AssessmentRequest {
 
     @ManyToOne
     @JoinColumn(name = "Service_Id", nullable = false)
-    private Service service;
+    private Services service;
 }
