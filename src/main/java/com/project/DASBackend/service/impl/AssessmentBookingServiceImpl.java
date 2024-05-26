@@ -13,6 +13,7 @@ import com.project.DASBackend.repository.ServiceRepository;
 import com.project.DASBackend.service.AssessmentBookingService;
 import lombok.AllArgsConstructor;
 import com.project.DASBackend.entity.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class AssessmentBookingServiceImpl implements AssessmentBookingService {
 
+    @Autowired
     private AssessmentBookingRepository assessmentBookingRepository;
     private AccountRepository accountRepository;
     private ServiceRepository serviceRepository;
