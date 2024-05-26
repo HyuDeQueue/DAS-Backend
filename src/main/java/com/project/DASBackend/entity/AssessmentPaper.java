@@ -82,6 +82,15 @@ public class AssessmentPaper {
     @Column(name = "Symmetry_Grade", nullable = false)
     private Float symmetryGrade;
 
+    @Column(name = "Cross_Section", columnDefinition = "MEDIUMTEXT", nullable = false)
+    private String crossSection;
+
+    @Column(name = "Longitudinal_Section", columnDefinition = "MEDIUMTEXT", nullable = false)
+    private String longitudinalSection;
+
+    @Column(name = "Transverse_Section", columnDefinition = "MEDIUMTEXT", nullable = false)
+    private String transverseSection;
+
     @Column(name = "Seal_Id", unique = true)
     private Integer sealId;
 

@@ -4,7 +4,6 @@ import com.project.DASBackend.dto.AssessmentPaperDto;
 import com.project.DASBackend.entity.Account;
 import com.project.DASBackend.entity.AssessmentPaper;
 import com.project.DASBackend.entity.BookingDetail;
-
 public class AssessmentPaperMapper {
     public static AssessmentPaperDto toDto(AssessmentPaper paper) {
         if (paper == null) {
@@ -33,6 +32,9 @@ public class AssessmentPaperMapper {
                 paper.getCrownHeight(),
                 paper.getPavilionDepth(),
                 paper.getSymmetryGrade(),
+                paper.getCrossSection(),
+                paper.getLongitudinalSection(),
+                paper.getTransverseSection(),
                 paper.getSealId(),
                 paper.getAccount().getAccountId(),
                 paper.getDetail().getDetailId()
@@ -66,6 +68,9 @@ public class AssessmentPaperMapper {
         paper.setCrownHeight(paperDto.getCrownHeight());
         paper.setPavilionDepth(paperDto.getPavilionDepth());
         paper.setSymmetryGrade(paperDto.getSymmetryGrade());
+        paper.setCrossSection(paperDto.getCrossSection());
+        paper.setLongitudinalSection(paperDto.getLongitudinalSection());
+        paper.setTransverseSection(paperDto.getTransverseSection());
         paper.setSealId(paperDto.getSealId());
         paper.setAccount(account);
         paper.setDetail(detail);
