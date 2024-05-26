@@ -3,7 +3,7 @@ package com.project.DASBackend.mapper;
 import com.project.DASBackend.dto.AssessmentRequestDto;
 import com.project.DASBackend.entity.Account;
 import com.project.DASBackend.entity.AssessmentRequest;
-import com.project.DASBackend.entity.Service;
+import com.project.DASBackend.entity.Services;
 
 public class AssessmentRequestMapper {
     public static AssessmentRequestDto toDto(AssessmentRequest request) {
@@ -22,7 +22,7 @@ public class AssessmentRequestMapper {
         );
     }
 
-    public static AssessmentRequest toEntity(AssessmentRequestDto requestDto, Account account, Service service) {
+    public static AssessmentRequest toEntity(AssessmentRequestDto requestDto, Account account, Services service) {
         if (requestDto == null) {
             return null;
         }

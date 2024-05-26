@@ -11,7 +11,7 @@ import lombok.*;
 @Table(name = "Service")
 @Data
 @Builder
-public class Service {
+public class Services {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Service_Id")
