@@ -4,6 +4,7 @@ import com.project.DASBackend.dto.AssessmentBookingDto;
 import com.project.DASBackend.entity.Account;
 import com.project.DASBackend.entity.AssessmentBooking;
 import com.project.DASBackend.entity.AssessmentRequest;
+import com.project.DASBackend.entity.Services;
 import com.project.DASBackend.exception.ResourceNotFoundException;
 import com.project.DASBackend.mapper.AssessmentBookingMapper;
 import com.project.DASBackend.repository.AccountRepository;
@@ -12,7 +13,7 @@ import com.project.DASBackend.repository.AssessmentRequestRepository;
 import com.project.DASBackend.repository.ServiceRepository;
 import com.project.DASBackend.service.AssessmentBookingService;
 import lombok.AllArgsConstructor;
-import com.project.DASBackend.entity.Service;
+import com.project.DASBackend.entity.Services;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
         Account account = accountRepository.findById(assessmentBookingDto.getAccountId())
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Account not found with given Id: " + assessmentBookingDto.getAccountId()));
-        Service service = serviceRepository.findById(assessmentBookingDto.getServiceId())
+        Services service = serviceRepository.findById(assessmentBookingDto.getServiceId())
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Service not found with given Id: " + assessmentBookingDto.getServiceId()));
         AssessmentRequest assessmentRequest = assessmentRequestRepository.findById(assessmentBookingDto.getRequestId())
@@ -70,7 +71,7 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
             assessmentBooking.setAccount(account);
         }
         if(!updatedAssessmentBookingDto.getServiceId().equals(assessmentBooking.getService().getServiceId())) {
-            Service service = serviceRepository.findById(updatedAssessmentBookingDto.getServiceId())
+            Services service = serviceRepository.findById(updatedAssessmentBookingDto.getServiceId())
                     .orElseThrow(
                             () -> new ResourceNotFoundException("Service not found with given Id: " + updatedAssessmentBookingDto.getServiceId()));
             assessmentBooking.setService(service);

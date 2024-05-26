@@ -3,7 +3,8 @@ package com.project.DASBackend.service.impl;
 import com.project.DASBackend.dto.AssessmentRequestDto;
 import com.project.DASBackend.entity.Account;
 import com.project.DASBackend.entity.AssessmentRequest;
-import com.project.DASBackend.entity.Service;
+import com.project.DASBackend.entity.Services;
+import com.project.DASBackend.entity.Services;
 import com.project.DASBackend.exception.ResourceNotFoundException;
 import com.project.DASBackend.mapper.AssessmentRequestMapper;
 import com.project.DASBackend.repository.AccountRepository;
@@ -28,7 +29,7 @@ public class AssessmentRequestServiceImpl implements AssessmentRequestService {
         // Fetch Account and Service objects based on identifiers from the DTO (e.g., accountId, serviceId)
         Account account = accountRepository.findById(assessmentRequestDto.getAccountId())
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
-        Service service = serviceRepository.findById(assessmentRequestDto.getServiceId())
+        Services service = serviceRepository.findById(assessmentRequestDto.getServiceId())
                 .orElseThrow(() -> new ResourceNotFoundException("Service not found"));
 
         AssessmentRequest assessmentRequest = AssessmentRequestMapper.toEntity(assessmentRequestDto, account, service);
@@ -70,7 +71,7 @@ public class AssessmentRequestServiceImpl implements AssessmentRequestService {
         }
 
         if (!assessmentRequest.getService().getServiceId().equals(updatedAssessmentRequestDto.getServiceId())) {
-            Service service = serviceRepository.findById(updatedAssessmentRequestDto.getServiceId())
+            Services service = serviceRepository.findById(updatedAssessmentRequestDto.getServiceId())
                     .orElseThrow(() -> new ResourceNotFoundException("Service not found"));
             assessmentRequest.setService(service);
         }
