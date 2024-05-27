@@ -1,17 +1,14 @@
 package com.project.DASBackend.service.impl;
 
 import com.project.DASBackend.dto.AssessmentBookingDto;
-import com.project.DASBackend.entity.Account;
-import com.project.DASBackend.entity.AssessmentBooking;
-import com.project.DASBackend.entity.AssessmentRequest;
-import com.project.DASBackend.entity.Services;
+import com.project.DASBackend.dto.BookingDetailDto;
+import com.project.DASBackend.entity.*;
 import com.project.DASBackend.exception.ResourceNotFoundException;
 import com.project.DASBackend.mapper.AssessmentBookingMapper;
-import com.project.DASBackend.repository.AccountRepository;
-import com.project.DASBackend.repository.AssessmentBookingRepository;
-import com.project.DASBackend.repository.AssessmentRequestRepository;
-import com.project.DASBackend.repository.ServiceRepository;
+import com.project.DASBackend.mapper.BookingDetailMapper;
+import com.project.DASBackend.repository.*;
 import com.project.DASBackend.service.AssessmentBookingService;
+import com.project.DASBackend.service.BookingDetailService;
 import lombok.AllArgsConstructor;
 import com.project.DASBackend.entity.Services;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +25,8 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
     private AccountRepository accountRepository;
     private ServiceRepository serviceRepository;
     private AssessmentRequestRepository assessmentRequestRepository;
+    private BookingDetailRepository bookingDetailRepository;
+
     @Override
     public AssessmentBookingDto createAssessmentBooking(AssessmentBookingDto assessmentBookingDto) {
         Account account = accountRepository.findById(assessmentBookingDto.getAccountId())
@@ -41,6 +40,19 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
                         () -> new ResourceNotFoundException("Assessment request not found with given Id: " + assessmentBookingDto.getRequestId()));
         AssessmentBooking assessmentBooking = AssessmentBookingMapper.toEntity(assessmentBookingDto, account, assessmentRequest, service);
         AssessmentBooking savedAssessmentBooking = assessmentBookingRepository.save(assessmentBooking);
+        //tao booking detail chua assessmentBooking
+        //i=0 to n kc
+        //tạo booking detail chứa savedAssessmentBookingId
+
+        for(int i = 0; i < savedAssessmentBooking.getNumberOfDiamonds(); i++){
+            BookingDetailDto newBookingDetailDto = new BookingDetailDto();
+            newBookingDetailDto.setStatus(1);
+            BookingDetail newBookingDetail = BookingDetailMapper.toEntity(newBookingDetailDto, savedAssessmentBooking);
+            bookingDetailRepository.save(newBookingDetail);
+        }
+
+
+
         return AssessmentBookingMapper.toDto(savedAssessmentBooking);
     }
 
@@ -57,6 +69,7 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
         List<AssessmentBooking> assessmentBookings = assessmentBookingRepository.findAll();
         return assessmentBookings.stream().map(assessmentBooking -> AssessmentBookingMapper.toDto(assessmentBooking))
                 .collect(Collectors.toList());
+        //lấy all bookingDetail trùng ID
     }
 
     @Override
@@ -83,6 +96,7 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
             assessmentBooking.setRequest(assessmentRequest);
         }
         assessmentBooking.setStatus(updatedAssessmentBookingDto.getStatus());
+        assessmentBooking.setNumberOfDiamonds(updatedAssessmentBookingDto.getNumberOfDiamonds());
         assessmentBooking.setDateCreated(updatedAssessmentBookingDto.getDateCreated());
         assessmentBooking.setFeedback(updatedAssessmentBookingDto.getFeedback());
         assessmentBooking.setDiamondReturnDate(updatedAssessmentBookingDto.getDiamondReturnDate());

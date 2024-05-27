@@ -13,6 +13,7 @@ public class AssessmentBookingMapper {
         }
         return new AssessmentBookingDto(
                 booking.getBookingId(),
+                booking.getNumberOfDiamonds(),
                 booking.getTotalPrice(),
                 booking.getDateCreated(),
                 booking.getDiamondReturnDate(),
@@ -32,6 +33,7 @@ public class AssessmentBookingMapper {
         }
         AssessmentBooking booking = new AssessmentBooking();
         booking.setBookingId(bookingDto.getBookingId());
+        booking.setNumberOfDiamonds(bookingDto.getNumberOfDiamonds());
         booking.setTotalPrice(bookingDto.getTotalPrice());
         booking.setDateCreated(bookingDto.getDateCreated());
         booking.setDiamondReturnDate(bookingDto.getDiamondReturnDate());

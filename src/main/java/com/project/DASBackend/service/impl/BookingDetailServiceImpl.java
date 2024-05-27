@@ -9,6 +9,7 @@ import com.project.DASBackend.repository.AssessmentBookingRepository;
 import com.project.DASBackend.repository.BookingDetailRepository;
 import com.project.DASBackend.service.BookingDetailService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class BookingDetailServiceImpl implements BookingDetailService {
 
+    @Autowired
     private BookingDetailRepository bookingDetailRepository;
     private AssessmentBookingRepository assessmentBookingRepository;
 

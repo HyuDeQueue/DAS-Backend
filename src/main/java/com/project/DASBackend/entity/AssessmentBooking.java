@@ -19,6 +19,9 @@ public class AssessmentBooking {
     @Column(name = "Booking_Id")
     private Integer bookingId;
 
+    @Column(name = "number_of_diamonds", nullable = false)
+    private Integer numberOfDiamonds;
+
     @Column(name = "total_price", nullable = false)
     private Integer totalPrice;
 

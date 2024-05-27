@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 public class AssessmentBookingDto {
     private Integer bookingId;
+    private Integer numberOfDiamonds;
     private Integer totalPrice;
     private LocalDateTime dateCreated;
     private LocalDateTime diamondReturnDate;
