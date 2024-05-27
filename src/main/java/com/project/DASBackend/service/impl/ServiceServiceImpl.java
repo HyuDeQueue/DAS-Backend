@@ -44,6 +44,18 @@ public class ServiceServiceImpl implements ServiceService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public ServiceDto UpdateService(Integer serviceId, ServiceDto serviceDto) {
+        Services services=serviceRepository.findById(serviceId)
+                .orElseThrow(() -> new RuntimeException("Service is not exist with given Id:"+serviceId));
+        services.setServiceName(serviceDto.getServiceName());
+        services.setServiceDescription(serviceDto.getServiceDescription());
+        services.setServicePrice(serviceDto.getServicePrice());
+        services.setServiceStatus(serviceDto.getServiceStatus());
+        Services saveService = serviceRepository.save(services);
+        return ServiceMapper.toDto((Services) saveService);
+    }
+
 //    public class ServiceDto {
 //        private Integer serviceId;
 //        private String serviceName;
@@ -51,19 +63,7 @@ public class ServiceServiceImpl implements ServiceService {
 //        private Integer servicePrice;
 //        private Integer serviceStatus;
 //    }
-    @Override
-    public ServiceDto UpdateService(Integer serviceId, ServiceDto serviceDto) {
-        Services services=serviceRepository.findById(serviceId)
-                .orElseThrow(() -> new RuntimeException("Service is not exist with given Id:" + serviceId));
 
-        services.setServiceName(serviceDto.getServiceName());
-        services.setServiceDescription(serviceDto.getServiceDescription());
-        services.setServicePrice(serviceDto.getServicePrice());
-        services.setServiceStatus(serviceDto.getServiceStatus());
-
-        Services updateServiceObj = serviceRepository.save(services);
-        return ServiceMapper.toDto(updateServiceObj);
-    }
 
     @Override
     public void DeleteService(Integer serviceId) {
