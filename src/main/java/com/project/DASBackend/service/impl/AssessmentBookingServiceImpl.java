@@ -37,7 +37,6 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
         AssessmentRequest assessmentRequest = assessmentRequestRepository.findById(assessmentBookingDto.getRequestId())
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Assessment request not found with given Id: " + assessmentBookingDto.getRequestId()));
-//        AssessmentBooking assessmentBooking = AssessmentBookingMapper.toEntity(assessmentBookingDto, account, assessmentRequest, service);
         AssessmentBooking assessmentBooking = AssessmentBookingMapper.toEntity(assessmentBookingDto, account, assessmentRequest);
         AssessmentBooking savedAssessmentBooking = assessmentBookingRepository.save(assessmentBooking);
         //tao booking detail chua assessmentBooking
