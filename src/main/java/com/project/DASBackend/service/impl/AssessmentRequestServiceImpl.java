@@ -59,10 +59,11 @@ public class AssessmentRequestServiceImpl implements AssessmentRequestService {
                         () -> new ResourceNotFoundException("Assessment request not found with the given ID: "+requestId));
 
         assessmentRequest.setPhone(updatedAssessmentRequestDto.getPhone());
-        assessmentRequest.setNumberOfDiamonds(updatedAssessmentRequestDto.getNumberOfDiamonds());
+        assessmentRequest.setNumberOfSamples(updatedAssessmentRequestDto.getNumberOfSamples());
         assessmentRequest.setDateCreated(updatedAssessmentRequestDto.getDateCreated());
         assessmentRequest.setMeetingDate(updatedAssessmentRequestDto.getMeetingDate());
         assessmentRequest.setAddress(updatedAssessmentRequestDto.getAddress());
+        assessmentRequest.setStatus(updatedAssessmentRequestDto.getStatus());
 
         if (!assessmentRequest.getAccount().getAccountId().equals(updatedAssessmentRequestDto.getAccountId())) {
             Account account = accountRepository.findById(updatedAssessmentRequestDto.getAccountId())

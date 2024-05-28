@@ -36,11 +36,4 @@ public class BookingSampleMapper {
         return sample;
     }
 
-    public static void updateEntityFromDto(BookingSampleDto detailDto, BookingSample detail, AssessmentBooking booking) {
-        if (detailDto == null) {
-            return;
-        }
-        detail.setStatus(detailDto.getStatus());
-        detail.setBooking(booking);
-    }
 }
