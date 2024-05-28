@@ -1,12 +1,16 @@
 # src/main/resources/application.yml
-#security:
-#  oauth2:
-#    client:
-#      registration:
-#        google:
-#          clientId: 200707558272-te7t2gl0frolmfep3rolgc1l8k71drgb.apps.googleusercontent.com
-#          clientSecret: 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
-#          redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
-#          scope:
-#            - email
-#            - profile
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: your-client-id
+            client-secret: your-client-secret
+            scope: profile, email
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs

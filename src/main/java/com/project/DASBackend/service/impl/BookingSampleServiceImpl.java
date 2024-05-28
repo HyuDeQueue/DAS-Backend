@@ -56,7 +56,12 @@ public class BookingSampleServiceImpl implements BookingSampleService {
         AssessmentBooking booking = assessmentBookingRepository.findById(bookingSampleDto.getBookingId())
                 .orElseThrow(() -> new ResourceNotFoundException("Assessment booking not found with given Id: " + bookingSampleDto.getBookingId()));
 
-        BookingSampleMapper.updateEntityFromDto(bookingSampleDto, bookingSample, booking);
+        bookingSample.setBooking(booking);
+        bookingSample.setName(bookingSampleDto.getName());
+        bookingSample.setStatus(bookingSampleDto.getStatus());
+        bookingSample.setIsDiamond(bookingSampleDto.getIsDiamond());
+        bookingSample.setSize(bookingSampleDto.getSize());
+        bookingSample.setPrice(bookingSampleDto.getPrice());
         BookingSample updatedBookingSample = bookingSampleRepository.save(bookingSample);
         return BookingSampleMapper.toDto(updatedBookingSample);
     }

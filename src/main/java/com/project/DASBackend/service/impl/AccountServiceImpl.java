@@ -52,7 +52,6 @@ public class AccountServiceImpl implements AccountService {
         account.setEmail(updatedAccountDto.getEmail());
         account.setFirstName(updatedAccountDto.getFirstName());
         account.setLastName(updatedAccountDto.getLastName());
-        account.setIdentityNum(updatedAccountDto.getIdentityNum());
         account.setGoogleAccessToken(updatedAccountDto.getGoogleAccessToken());
         account.setRefreshToken(updatedAccountDto.getRefreshToken());
         account.setAccessTokenExpiryTime(updatedAccountDto.getAccessTokenExpiryTime());
