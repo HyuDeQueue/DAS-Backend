@@ -38,7 +38,7 @@ public class AccountController {
     @PutMapping("{id}")
     public ResponseEntity<AccountDto> updateAccount(@RequestBody AccountDto accountDto,
                                                     @PathVariable("id") Integer accountId){
-        return ResponseEntity.ok(accountService.updateAccount(accountDto, accountId));
+        return ResponseEntity.ok(accountService.updateAccount(accountId, accountDto));
     }
 
     @DeleteMapping("{id}")

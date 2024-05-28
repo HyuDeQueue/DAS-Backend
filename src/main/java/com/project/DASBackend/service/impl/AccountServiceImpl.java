@@ -30,9 +30,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto getAccountById(Integer accountId) {
         Account account = accountRepository.findById(accountId)
-                .orElseThrow(
-                        () -> new ResourceNotFoundException("Account is not exist with given Id: " + accountId));
-
+                .orElseThrow(() -> new ResourceNotFoundException("Account not found with given Id: " + accountId));
         return AccountMapper.toDto(account);
     }
 
@@ -44,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AccountDto updateAccount(AccountDto updatedAccountDto, Integer accountId) {
+    public AccountDto updateAccount(Integer accountId, AccountDto updatedAccountDto) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Account is not exist with given Id: " + accountId));
@@ -57,6 +55,7 @@ public class AccountServiceImpl implements AccountService {
         account.setAccessTokenExpiryTime(updatedAccountDto.getAccessTokenExpiryTime());
         account.setAccountStatus(updatedAccountDto.getAccountStatus());
         account.setRole(updatedAccountDto.getRole());
+
         Account updatedAccount = accountRepository.save(account);
         return AccountMapper.toDto(updatedAccount);
     }
