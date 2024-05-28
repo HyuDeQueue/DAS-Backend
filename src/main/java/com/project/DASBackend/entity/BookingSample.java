@@ -11,11 +11,23 @@ import lombok.*;
 @Data
 @Entity
 @Table(name = "Booking_Detail")
-public class BookingDetail {
+public class BookingSample {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Detail_Id")
-    private Integer detailId;
+    @Column(name = "Sample_Id")
+    private Integer sampleId;
+
+    @Column(name = "IsDiamond", nullable = false)
+    private Integer isDiamond;
+
+    @Column(name = "Name", nullable = false)
+    private String name;
+
+    @Column(name = "Size", nullable = false)
+    private Float size;
+
+    @Column(name = "Price", nullable = false)
+    private Integer price;
 
     @Column(name = "Status", nullable = false)
     private Integer status;

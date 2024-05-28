@@ -3,7 +3,7 @@ package com.project.DASBackend.mapper;
 import com.project.DASBackend.dto.AssessmentPaperDto;
 import com.project.DASBackend.entity.Account;
 import com.project.DASBackend.entity.AssessmentPaper;
-import com.project.DASBackend.entity.BookingDetail;
+import com.project.DASBackend.entity.BookingSample;
 public class AssessmentPaperMapper {
     public static AssessmentPaperDto toDto(AssessmentPaper paper) {
         if (paper == null) {
@@ -37,11 +37,11 @@ public class AssessmentPaperMapper {
                 paper.getTransverseSection(),
                 paper.getSealId(),
                 paper.getAccount().getAccountId(),
-                paper.getDetail().getDetailId()
+                paper.getSample().getSampleId()
         );
     }
 
-    public static AssessmentPaper toEntity(AssessmentPaperDto paperDto, Account account, BookingDetail detail) {
+    public static AssessmentPaper toEntity(AssessmentPaperDto paperDto, Account account, BookingSample sample) {
         if (paperDto == null) {
             return null;
         }
@@ -73,7 +73,7 @@ public class AssessmentPaperMapper {
         paper.setTransverseSection(paperDto.getTransverseSection());
         paper.setSealId(paperDto.getSealId());
         paper.setAccount(account);
-        paper.setDetail(detail);
+        paper.setSample(sample);
         return paper;
     }
 }

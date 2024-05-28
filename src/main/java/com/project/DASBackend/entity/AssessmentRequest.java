@@ -23,8 +23,8 @@ public class AssessmentRequest {
     @Column(name = "Phone", nullable = false)
     private String phone;
 
-    @Column(name = "Number_of_diamonds", nullable = false)
-    private Integer numberOfDiamonds;
+    @Column(name = "Number_of_samples", nullable = false)
+    private Integer numberOfSamples;
 
     @Column(name = "Date_created", nullable = false)
     private LocalDateTime dateCreated;
@@ -34,6 +34,9 @@ public class AssessmentRequest {
 
     @Column(name = "Address", nullable = false)
     private String address;
+
+    @Column(name = "Status", nullable = false)
+    private Integer status;
 
     @ManyToOne
     @JoinColumn(name = "Account_Id", nullable = false)

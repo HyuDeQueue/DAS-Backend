@@ -14,7 +14,9 @@ public class CommitmentPaperDto {
     private LocalDateTime dateCreated;
     private LocalDateTime approvalDate;
     private String commitmentType;
+    private String title;
     private String description;
+    private Integer status;
     private Integer bookingId;
     private Integer accountId;
 }

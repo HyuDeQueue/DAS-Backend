@@ -13,7 +13,6 @@ public class AccountMapper {
                 account.getEmail(),
                 account.getFirstName(),
                 account.getLastName(),
-                account.getIdentityNum(),
                 account.getGoogleAccessToken(),
                 account.getRefreshToken(),
                 account.getAccessTokenExpiryTime(),
@@ -31,7 +30,6 @@ public class AccountMapper {
         account.setEmail(accountDto.getEmail());
         account.setFirstName(accountDto.getFirstName());
         account.setLastName(accountDto.getLastName());
-        account.setIdentityNum(accountDto.getIdentityNum());
         account.setGoogleAccessToken(accountDto.getGoogleAccessToken());
         account.setRefreshToken(accountDto.getRefreshToken());
         account.setAccessTokenExpiryTime(accountDto.getAccessTokenExpiryTime());

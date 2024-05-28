@@ -99,6 +99,6 @@ public class AssessmentPaper {
     private Account account;
 
     @ManyToOne
-    @JoinColumn(name = "Detail_Id", nullable = false)
-    private BookingDetail detail;
+    @JoinColumn(name = "Sample_Id", nullable = false)
+    private BookingSample sample;
 }

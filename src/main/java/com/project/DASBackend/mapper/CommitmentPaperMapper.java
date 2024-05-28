@@ -15,7 +15,9 @@ public class CommitmentPaperMapper {
                 paper.getDateCreated(),
                 paper.getApprovalDate(),
                 paper.getCommitmentType(),
+                paper.getTitle(),
                 paper.getDescription(),
+                paper.getStatus(),
                 paper.getBooking().getBookingId(),
                 paper.getAccount().getAccountId()
         );
@@ -30,7 +32,9 @@ public class CommitmentPaperMapper {
         paper.setDateCreated(paperDto.getDateCreated());
         paper.setApprovalDate(paperDto.getApprovalDate());
         paper.setCommitmentType(paperDto.getCommitmentType());
+        paper.setTitle(paperDto.getTitle());
         paper.setDescription(paperDto.getDescription());
+        paper.setStatus(paperDto.getStatus());
         paper.setBooking(booking);
         paper.setAccount(account);
         return paper;

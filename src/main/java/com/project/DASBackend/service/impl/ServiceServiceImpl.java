@@ -40,7 +40,7 @@ public class ServiceServiceImpl implements ServiceService {
     @Override
     public List<ServiceDto> GetAllServices() {
         List<Services> servicesAll=serviceRepository.findAll();
-        return servicesAll.stream().map((services) -> ServiceMapper.toDto(services))
+        return servicesAll.stream().map(ServiceMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -50,7 +50,6 @@ public class ServiceServiceImpl implements ServiceService {
                 .orElseThrow(() -> new RuntimeException("Service is not exist with given Id:"+serviceId));
         services.setServiceName(serviceDto.getServiceName());
         services.setServiceDescription(serviceDto.getServiceDescription());
-        services.setServicePrice(serviceDto.getServicePrice());
         services.setServiceStatus(serviceDto.getServiceStatus());
         Services saveService = serviceRepository.save(services);
         return ServiceMapper.toDto((Services) saveService);

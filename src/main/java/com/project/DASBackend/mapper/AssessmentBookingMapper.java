@@ -13,17 +13,16 @@ public class AssessmentBookingMapper {
         }
         return new AssessmentBookingDto(
                 booking.getBookingId(),
-                booking.getNumberOfDiamonds(),
+                booking.getQuantity(),
                 booking.getTotalPrice(),
                 booking.getDateCreated(),
-                booking.getDiamondReturnDate(),
-                booking.getStatus(),
+                booking.getSampleReturnDate(),
+                booking.getFeedback(),
                 booking.getPaymentType(),
                 booking.getPaymentStatus(),
-                booking.getFeedback(),
+                booking.getStatus(),
                 booking.getAccount().getAccountId(),
-                booking.getRequest().getRequestId(),
-                booking.getService().getServiceId()
+                booking.getRequest().getRequestId()
         );
     }
 
@@ -33,17 +32,16 @@ public class AssessmentBookingMapper {
         }
         AssessmentBooking booking = new AssessmentBooking();
         booking.setBookingId(bookingDto.getBookingId());
-        booking.setNumberOfDiamonds(bookingDto.getNumberOfDiamonds());
+        booking.setQuantity(bookingDto.getQuantity());
         booking.setTotalPrice(bookingDto.getTotalPrice());
         booking.setDateCreated(bookingDto.getDateCreated());
-        booking.setDiamondReturnDate(bookingDto.getDiamondReturnDate());
+        booking.setSampleReturnDate(bookingDto.getSampleReturnDate());
+        booking.setFeedback(bookingDto.getFeedback());
         booking.setStatus(bookingDto.getStatus());
         booking.setPaymentType(bookingDto.getPaymentType());
         booking.setPaymentStatus(bookingDto.getPaymentStatus());
-        booking.setFeedback(bookingDto.getFeedback());
         booking.setAccount(account);
         booking.setRequest(request);
-        booking.setService(service);
         return booking;
     }
 }

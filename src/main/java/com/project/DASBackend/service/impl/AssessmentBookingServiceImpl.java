@@ -1,14 +1,13 @@
 package com.project.DASBackend.service.impl;
 
 import com.project.DASBackend.dto.AssessmentBookingDto;
-import com.project.DASBackend.dto.BookingDetailDto;
+import com.project.DASBackend.dto.BookingSampleDto;
 import com.project.DASBackend.entity.*;
 import com.project.DASBackend.exception.ResourceNotFoundException;
 import com.project.DASBackend.mapper.AssessmentBookingMapper;
-import com.project.DASBackend.mapper.BookingDetailMapper;
+import com.project.DASBackend.mapper.BookingSampleMapper;
 import com.project.DASBackend.repository.*;
 import com.project.DASBackend.service.AssessmentBookingService;
-import com.project.DASBackend.service.BookingDetailService;
 import lombok.AllArgsConstructor;
 import com.project.DASBackend.entity.Services;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
     private AccountRepository accountRepository;
     private ServiceRepository serviceRepository;
     private AssessmentRequestRepository assessmentRequestRepository;
-    private BookingDetailRepository bookingDetailRepository;
+    private BookingSampleRepository bookingSampleRepository;
 
     @Override
     public AssessmentBookingDto createAssessmentBooking(AssessmentBookingDto assessmentBookingDto) {
@@ -45,10 +44,10 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
         //tạo booking detail chứa savedAssessmentBookingId
 
         for(int i = 0; i < savedAssessmentBooking.getNumberOfDiamonds(); i++){
-            BookingDetailDto newBookingDetailDto = new BookingDetailDto();
-            newBookingDetailDto.setStatus(1);
-            BookingDetail newBookingDetail = BookingDetailMapper.toEntity(newBookingDetailDto, savedAssessmentBooking);
-            bookingDetailRepository.save(newBookingDetail);
+            BookingSampleDto newBookingSampleDto = new BookingSampleDto();
+            newBookingSampleDto.setStatus(1);
+            BookingSample newBookingSample = BookingSampleMapper.toEntity(newBookingSampleDto, savedAssessmentBooking);
+            bookingSampleRepository.save(newBookingSample);
         }
 
 

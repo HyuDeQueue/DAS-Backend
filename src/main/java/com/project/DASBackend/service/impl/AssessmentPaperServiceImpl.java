@@ -1,16 +1,14 @@
 package com.project.DASBackend.service.impl;
 
-import com.project.DASBackend.controller.AccountController;
-import com.project.DASBackend.dto.AccountDto;
 import com.project.DASBackend.dto.AssessmentPaperDto;
 import com.project.DASBackend.entity.Account;
 import com.project.DASBackend.entity.AssessmentPaper;
-import com.project.DASBackend.entity.BookingDetail;
+import com.project.DASBackend.entity.BookingSample;
 import com.project.DASBackend.exception.ResourceNotFoundException;
 import com.project.DASBackend.mapper.AssessmentPaperMapper;
 import com.project.DASBackend.repository.AccountRepository;
 import com.project.DASBackend.repository.AssessmentPaperRepository;
-import com.project.DASBackend.repository.BookingDetailRepository;
+import com.project.DASBackend.repository.BookingSampleRepository;
 import com.project.DASBackend.service.AssessmentPaperService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,17 +22,17 @@ public class AssessmentPaperServiceImpl implements AssessmentPaperService {
 
     private AssessmentPaperRepository assessmentPaperRepository;
     private AccountRepository accountRepository;
-    private BookingDetailRepository bookingDetailRepository;
+    private BookingSampleRepository bookingSampleRepository;
 
     @Override
     public AssessmentPaperDto createAssessmentPaper(AssessmentPaperDto assessmentPaperDto) {
         Account account = accountRepository.findById(assessmentPaperDto.getAccountId())
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Account not found with given Id: " + assessmentPaperDto.getAccountId()));
-        BookingDetail bookingDetail = bookingDetailRepository.findById(assessmentPaperDto.getDetailId())
+        BookingSample bookingSample = bookingSampleRepository.findById(assessmentPaperDto.getDetailId())
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Booking detail not found with given Id: " + assessmentPaperDto.getDetailId()));
-        AssessmentPaper assessmentPaper = AssessmentPaperMapper.toEntity(assessmentPaperDto, account, bookingDetail);
+        AssessmentPaper assessmentPaper = AssessmentPaperMapper.toEntity(assessmentPaperDto, account, bookingSample);
         AssessmentPaper savedAssessmentPaper = assessmentPaperRepository.save(assessmentPaper);
         return AssessmentPaperMapper.toDto(savedAssessmentPaper);
     }
@@ -67,10 +65,10 @@ public class AssessmentPaperServiceImpl implements AssessmentPaperService {
         }
 
         if(!updatedAssessmentPaperDto.getDetailId().equals(updatedAssessmentPaperDto.getDetailId())){
-            BookingDetail bookingDetail = bookingDetailRepository.findById(updatedAssessmentPaperDto.getDetailId())
+            BookingSample bookingSample = bookingSampleRepository.findById(updatedAssessmentPaperDto.getDetailId())
                     .orElseThrow(
                             () -> new ResourceNotFoundException("Booking detail not found with given Id: " + updatedAssessmentPaperDto.getDetailId()));
-            assessmentPaper.setDetail(bookingDetail);
+            assessmentPaper.setDetail(bookingSample);
         }
 
         assessmentPaper.setType(updatedAssessmentPaperDto.getType());

@@ -30,8 +30,14 @@ public class CommitmentPaper {
     @Column(name = "CommitmentType", nullable = false)
     private String commitmentType;
 
+    @Column(name = "Title", nullable = false)
+    private String title;
+
     @Column(name = "Description", nullable = false)
     private String description;
+
+    @Column(name = "Status", nullable = false)
+    private Integer status;
 
     @ManyToOne
     @JoinColumn(name = "Booking_Id", nullable = false)

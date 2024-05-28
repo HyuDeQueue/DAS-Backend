@@ -14,10 +14,11 @@ import java.time.LocalDateTime;
 public class AssessmentRequestDto {
     private Integer requestId;
     private String phone;
-    private Integer numberOfDiamonds;
+    private Integer numberOfSamples;
     private LocalDateTime dateCreated;
     private LocalDateTime meetingDate;
     private String address;
+    private Integer status;
     private Integer accountId;
     private Integer serviceId;
 }

@@ -12,15 +12,14 @@ import java.time.LocalDateTime;
 @Builder
 public class AssessmentBookingDto {
     private Integer bookingId;
-    private Integer numberOfDiamonds;
+    private Integer quantity;
     private Integer totalPrice;
     private LocalDateTime dateCreated;
-    private LocalDateTime diamondReturnDate;
-    private Integer status;
+    private LocalDateTime sampleReturnDate;
+    private String feedback;
     private Integer paymentType;
     private Integer paymentStatus;
-    private String feedback;
+    private Integer status;
     private Integer accountId;
     private Integer requestId;
-    private Integer serviceId;
 }

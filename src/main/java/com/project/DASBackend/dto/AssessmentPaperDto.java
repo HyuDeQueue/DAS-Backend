@@ -38,6 +38,6 @@ public class AssessmentPaperDto {
     private String transverseSection;
     private Integer sealId;
     private Integer accountId;
-    private Integer detailId;
+    private Integer sampleId;
 
 }

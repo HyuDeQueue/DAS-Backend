@@ -13,10 +13,11 @@ public class AssessmentRequestMapper {
         return new AssessmentRequestDto(
                 request.getRequestId(),
                 request.getPhone(),
-                request.getNumberOfDiamonds(),
+                request.getNumberOfSamples(),
                 request.getDateCreated(),
                 request.getMeetingDate(),
                 request.getAddress(),
+                request.getStatus(),
                 request.getAccount().getAccountId(),
                 request.getService().getServiceId()
         );
@@ -29,10 +30,11 @@ public class AssessmentRequestMapper {
         AssessmentRequest request = new AssessmentRequest();
         request.setRequestId(requestDto.getRequestId());
         request.setPhone(requestDto.getPhone());
-        request.setNumberOfDiamonds(requestDto.getNumberOfDiamonds());
+        request.setNumberOfSamples(requestDto.getNumberOfSamples());
         request.setDateCreated(requestDto.getDateCreated());
         request.setMeetingDate(requestDto.getMeetingDate());
         request.setAddress(requestDto.getAddress());
+        request.setStatus(requestDto.getStatus());
         request.setAccount(account);
         request.setService(service);
         return request;

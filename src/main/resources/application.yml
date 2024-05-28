@@ -1,1 +1,12 @@
 # src/main/resources/application.yml
+#security:
+#  oauth2:
+#    client:
+#      registration:
+#        google:
+#          clientId: 200707558272-te7t2gl0frolmfep3rolgc1l8k71drgb.apps.googleusercontent.com
+#          clientSecret: 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
+#          redirectUriTemplate: "{baseUrl}/oauth2/callback/{registrationId}"
+#          scope:
+#            - email
+#            - profile

@@ -29,9 +29,6 @@ public class Account {
     @Column(name = "Last_Name", nullable = false)
     private String lastName;
 
-    @Column(name = "IdentityNum", nullable = false, unique = true)
-    private String identityNum;
-
     @Column(name = "Google_access_token", nullable = false)
     private String googleAccessToken;
 
