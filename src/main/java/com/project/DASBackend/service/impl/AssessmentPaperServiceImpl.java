@@ -29,9 +29,9 @@ public class AssessmentPaperServiceImpl implements AssessmentPaperService {
         Account account = accountRepository.findById(assessmentPaperDto.getAccountId())
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Account not found with given Id: " + assessmentPaperDto.getAccountId()));
-        BookingSample bookingSample = bookingSampleRepository.findById(assessmentPaperDto.getDetailId())
+        BookingSample bookingSample = bookingSampleRepository.findById(assessmentPaperDto.getSampleId())
                 .orElseThrow(
-                        () -> new ResourceNotFoundException("Booking detail not found with given Id: " + assessmentPaperDto.getDetailId()));
+                        () -> new ResourceNotFoundException("Booking detail not found with given Id: " + assessmentPaperDto.getSampleId()));
         AssessmentPaper assessmentPaper = AssessmentPaperMapper.toEntity(assessmentPaperDto, account, bookingSample);
         AssessmentPaper savedAssessmentPaper = assessmentPaperRepository.save(assessmentPaper);
         return AssessmentPaperMapper.toDto(savedAssessmentPaper);
@@ -64,11 +64,11 @@ public class AssessmentPaperServiceImpl implements AssessmentPaperService {
             assessmentPaper.setAccount(account);
         }
 
-        if(!updatedAssessmentPaperDto.getDetailId().equals(updatedAssessmentPaperDto.getDetailId())){
-            BookingSample bookingSample = bookingSampleRepository.findById(updatedAssessmentPaperDto.getDetailId())
+        if(!updatedAssessmentPaperDto.getSampleId().equals(updatedAssessmentPaperDto.getSampleId())){
+            BookingSample bookingSample = bookingSampleRepository.findById(updatedAssessmentPaperDto.getSampleId())
                     .orElseThrow(
-                            () -> new ResourceNotFoundException("Booking detail not found with given Id: " + updatedAssessmentPaperDto.getDetailId()));
-            assessmentPaper.setDetail(bookingSample);
+                            () -> new ResourceNotFoundException("Booking detail not found with given Id: " + updatedAssessmentPaperDto.getSampleId()));
+            assessmentPaper.setSample(bookingSample);
         }
 
         assessmentPaper.setType(updatedAssessmentPaperDto.getType());

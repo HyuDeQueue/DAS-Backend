@@ -22,4 +22,5 @@ public class AssessmentBookingDto {
     private Integer status;
     private Integer accountId;
     private Integer requestId;
+
 }

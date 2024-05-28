@@ -52,12 +52,13 @@ public class AccountServiceImpl implements AccountService {
         account.setEmail(updatedAccountDto.getEmail());
         account.setFirstName(updatedAccountDto.getFirstName());
         account.setLastName(updatedAccountDto.getLastName());
-        account.setIdentityNum(updatedAccountDto.getIdentityNum());
+//        account.setIdentityNum(updatedAccountDto.getIdentityNum());
         account.setGoogleAccessToken(updatedAccountDto.getGoogleAccessToken());
         account.setRefreshToken(updatedAccountDto.getRefreshToken());
         account.setAccessTokenExpiryTime(updatedAccountDto.getAccessTokenExpiryTime());
         account.setAccountStatus(updatedAccountDto.getAccountStatus());
         account.setRole(updatedAccountDto.getRole());
+
         Account updatedAccount = accountRepository.save(account);
         return AccountMapper.toDto(updatedAccount);
     }

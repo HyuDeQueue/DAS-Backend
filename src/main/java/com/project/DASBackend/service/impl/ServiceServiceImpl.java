@@ -55,15 +55,6 @@ public class ServiceServiceImpl implements ServiceService {
         return ServiceMapper.toDto((Services) saveService);
     }
 
-//    public class ServiceDto {
-//        private Integer serviceId;
-//        private String serviceName;
-//        private String serviceDescription;
-//        private Integer servicePrice;
-//        private Integer serviceStatus;
-//    }
-
-
     @Override
     public void DeleteService(Integer serviceId) {
         Services services=serviceRepository.findById(serviceId)

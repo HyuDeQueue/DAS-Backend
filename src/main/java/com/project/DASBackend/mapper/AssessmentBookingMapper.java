@@ -26,7 +26,8 @@ public class AssessmentBookingMapper {
         );
     }
 
-    public static AssessmentBooking toEntity(AssessmentBookingDto bookingDto, Account account, AssessmentRequest request, Services service) {
+//    public static AssessmentBooking toEntity(AssessmentBookingDto bookingDto, Account account, AssessmentRequest request, Services service) {
+public static AssessmentBooking toEntity(AssessmentBookingDto bookingDto, Account account, AssessmentRequest request) {
         if (bookingDto == null) {
             return null;
         }

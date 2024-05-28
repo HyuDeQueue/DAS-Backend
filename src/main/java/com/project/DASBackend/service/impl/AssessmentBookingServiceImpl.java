@@ -31,13 +31,14 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
         Account account = accountRepository.findById(assessmentBookingDto.getAccountId())
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Account not found with given Id: " + assessmentBookingDto.getAccountId()));
-        Services service = serviceRepository.findById(assessmentBookingDto.getServiceId())
-                .orElseThrow(
-                        () -> new ResourceNotFoundException("Service not found with given Id: " + assessmentBookingDto.getServiceId()));
+//        Services service = serviceRepository.findById(assessmentBookingDto.getServiceId())
+//                .orElseThrow(
+//                        () -> new ResourceNotFoundException("Service not found with given Id: " + assessmentBookingDto.getServiceId()));
         AssessmentRequest assessmentRequest = assessmentRequestRepository.findById(assessmentBookingDto.getRequestId())
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Assessment request not found with given Id: " + assessmentBookingDto.getRequestId()));
-        AssessmentBooking assessmentBooking = AssessmentBookingMapper.toEntity(assessmentBookingDto, account, assessmentRequest, service);
+//        AssessmentBooking assessmentBooking = AssessmentBookingMapper.toEntity(assessmentBookingDto, account, assessmentRequest, service);
+        AssessmentBooking assessmentBooking = AssessmentBookingMapper.toEntity(assessmentBookingDto, account, assessmentRequest);
         AssessmentBooking savedAssessmentBooking = assessmentBookingRepository.save(assessmentBooking);
         //tao booking detail chua assessmentBooking
         //i=0 to n kc
@@ -82,12 +83,12 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
                             () -> new ResourceNotFoundException("Account not found with given Id: " + updatedAssessmentBookingDto.getAccountId()));
             assessmentBooking.setAccount(account);
         }
-        if(!updatedAssessmentBookingDto.getServiceId().equals(assessmentBooking.getService().getServiceId())) {
-            Services service = serviceRepository.findById(updatedAssessmentBookingDto.getServiceId())
-                    .orElseThrow(
-                            () -> new ResourceNotFoundException("Service not found with given Id: " + updatedAssessmentBookingDto.getServiceId()));
-            assessmentBooking.setService(service);
-        }
+//        if(!updatedAssessmentBookingDto.getServiceId().equals(assessmentBooking.getService().getServiceId())) {
+//            Services service = serviceRepository.findById(updatedAssessmentBookingDto.getServiceId())
+//                    .orElseThrow(
+//                            () -> new ResourceNotFoundException("Service not found with given Id: " + updatedAssessmentBookingDto.getServiceId()));
+//            assessmentBooking.setService(service);
+//        }
         if(!updatedAssessmentBookingDto.getRequestId().equals(assessmentBooking.getRequest().getRequestId())) {
             AssessmentRequest assessmentRequest = assessmentRequestRepository.findById(updatedAssessmentBookingDto.getRequestId())
                     .orElseThrow(
@@ -95,10 +96,10 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
             assessmentBooking.setRequest(assessmentRequest);
         }
         assessmentBooking.setStatus(updatedAssessmentBookingDto.getStatus());
-        assessmentBooking.setNumberOfDiamonds(updatedAssessmentBookingDto.getNumberOfDiamonds());
+        assessmentBooking.setQuantity(updatedAssessmentBookingDto.getQuantity());
         assessmentBooking.setDateCreated(updatedAssessmentBookingDto.getDateCreated());
         assessmentBooking.setFeedback(updatedAssessmentBookingDto.getFeedback());
-        assessmentBooking.setDiamondReturnDate(updatedAssessmentBookingDto.getDiamondReturnDate());
+        assessmentBooking.setSampleReturnDate(updatedAssessmentBookingDto.getSampleReturnDate());
         assessmentBooking.setTotalPrice(updatedAssessmentBookingDto.getTotalPrice());
         assessmentBooking.setPaymentType(updatedAssessmentBookingDto.getPaymentType());
         assessmentBooking.setPaymentStatus(updatedAssessmentBookingDto.getPaymentStatus());

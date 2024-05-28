@@ -51,4 +51,7 @@ public class AssessmentBooking {
     @JoinColumn(name = "Request_Id", nullable = false)
     private AssessmentRequest request;
 
+    public int getNumberOfDiamonds() {
+        return quantity;
+    }
 }
