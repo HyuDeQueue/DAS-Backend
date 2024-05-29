@@ -22,38 +22,36 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
     @Autowired
     private AssessmentBookingRepository assessmentBookingRepository;
     private AccountRepository accountRepository;
-    private ServiceRepository serviceRepository;
     private AssessmentRequestRepository assessmentRequestRepository;
     private BookingSampleRepository bookingSampleRepository;
+
 
     @Override
     public AssessmentBookingDto createAssessmentBooking(AssessmentBookingDto assessmentBookingDto) {
         Account account = accountRepository.findById(assessmentBookingDto.getAccountId())
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Account not found with given Id: " + assessmentBookingDto.getAccountId()));
-//        Services service = serviceRepository.findById(assessmentBookingDto.getServiceId())
-//                .orElseThrow(
-//                        () -> new ResourceNotFoundException("Service not found with given Id: " + assessmentBookingDto.getServiceId()));
         AssessmentRequest assessmentRequest = assessmentRequestRepository.findById(assessmentBookingDto.getRequestId())
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Assessment request not found with given Id: " + assessmentBookingDto.getRequestId()));
         AssessmentBooking assessmentBooking = AssessmentBookingMapper.toEntity(assessmentBookingDto, account, assessmentRequest);
+
+        // Lưu các BookingSample
+        List<BookingSample> bookingSamples = assessmentBookingDto.getBookingSamples().stream()
+                .map(sampleDto -> BookingSampleMapper.toEntity(sampleDto, assessmentBooking))
+                .collect(Collectors.toList());
+        assessmentBooking.setBookingSamples(bookingSamples);
+
         AssessmentBooking savedAssessmentBooking = assessmentBookingRepository.save(assessmentBooking);
-        //tao booking detail chua assessmentBooking
-        //i=0 to n kc
-        //tạo booking detail chứa savedAssessmentBookingId
 
-        for(int i = 0; i < savedAssessmentBooking.getNumberOfDiamonds(); i++){
-            BookingSampleDto newBookingSampleDto = new BookingSampleDto();
-            newBookingSampleDto.setStatus(1);
-            BookingSample newBookingSample = BookingSampleMapper.toEntity(newBookingSampleDto, savedAssessmentBooking);
-            bookingSampleRepository.save(newBookingSample);
-        }
-
-
+        // Lưu các BookingSample vào repository
+        bookingSamples.forEach(bookingSampleRepository::save);
 
         return AssessmentBookingMapper.toDto(savedAssessmentBooking);
     }
+
+
+
 
     @Override
     public AssessmentBookingDto getAssessmentBookingById(Integer bookingId) {
@@ -66,34 +64,29 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
     @Override
     public List<AssessmentBookingDto> getAllAssessmentBookings() {
         List<AssessmentBooking> assessmentBookings = assessmentBookingRepository.findAll();
-        return assessmentBookings.stream().map(assessmentBooking -> AssessmentBookingMapper.toDto(assessmentBooking))
+        return assessmentBookings.stream()
+                .map(AssessmentBookingMapper::toDto)
                 .collect(Collectors.toList());
-        //lấy all bookingDetail trùng ID
     }
+
 
     @Override
     public AssessmentBookingDto updateAssessmentBooking(AssessmentBookingDto updatedAssessmentBookingDto, Integer bookingId) {
         AssessmentBooking assessmentBooking = assessmentBookingRepository.findById(bookingId)
-                .orElseThrow(
-                        () -> new ResourceNotFoundException("Assessment booking not found with given Id: " + bookingId));
-        if(!updatedAssessmentBookingDto.getAccountId().equals(assessmentBooking.getAccount().getAccountId())) {
+                .orElseThrow(() -> new ResourceNotFoundException("Assessment booking not found with given Id: " + bookingId));
+
+        if (!updatedAssessmentBookingDto.getAccountId().equals(assessmentBooking.getAccount().getAccountId())) {
             Account account = accountRepository.findById(updatedAssessmentBookingDto.getAccountId())
-                    .orElseThrow(
-                            () -> new ResourceNotFoundException("Account not found with given Id: " + updatedAssessmentBookingDto.getAccountId()));
+                    .orElseThrow(() -> new ResourceNotFoundException("Account not found with given Id: " + updatedAssessmentBookingDto.getAccountId()));
             assessmentBooking.setAccount(account);
         }
-//        if(!updatedAssessmentBookingDto.getServiceId().equals(assessmentBooking.getService().getServiceId())) {
-//            Services service = serviceRepository.findById(updatedAssessmentBookingDto.getServiceId())
-//                    .orElseThrow(
-//                            () -> new ResourceNotFoundException("Service not found with given Id: " + updatedAssessmentBookingDto.getServiceId()));
-//            assessmentBooking.setService(service);
-//        }
-        if(!updatedAssessmentBookingDto.getRequestId().equals(assessmentBooking.getRequest().getRequestId())) {
+
+        if (!updatedAssessmentBookingDto.getRequestId().equals(assessmentBooking.getRequest().getRequestId())) {
             AssessmentRequest assessmentRequest = assessmentRequestRepository.findById(updatedAssessmentBookingDto.getRequestId())
-                    .orElseThrow(
-                            () -> new ResourceNotFoundException("Assessment request not found with given Id: " + updatedAssessmentBookingDto.getRequestId()));
+                    .orElseThrow(() -> new ResourceNotFoundException("Assessment request not found with given Id: " + updatedAssessmentBookingDto.getRequestId()));
             assessmentBooking.setRequest(assessmentRequest);
         }
+
         assessmentBooking.setStatus(updatedAssessmentBookingDto.getStatus());
         assessmentBooking.setQuantity(updatedAssessmentBookingDto.getQuantity());
         assessmentBooking.setDateCreated(updatedAssessmentBookingDto.getDateCreated());
@@ -102,10 +95,18 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
         assessmentBooking.setTotalPrice(updatedAssessmentBookingDto.getTotalPrice());
         assessmentBooking.setPaymentType(updatedAssessmentBookingDto.getPaymentType());
         assessmentBooking.setPaymentStatus(updatedAssessmentBookingDto.getPaymentStatus());
+
+        // Cập nhật danh sách BookingSample
+        List<BookingSample> updatedBookingSamples = updatedAssessmentBookingDto.getBookingSamples().stream()
+                .map(sampleDto -> BookingSampleMapper.toEntity(sampleDto, assessmentBooking))
+                .collect(Collectors.toList());
+        assessmentBooking.getBookingSamples().clear();
+        assessmentBooking.getBookingSamples().addAll(updatedBookingSamples);
+
         AssessmentBooking savedAssessmentBooking = assessmentBookingRepository.save(assessmentBooking);
         return AssessmentBookingMapper.toDto(savedAssessmentBooking);
-
     }
+
 
     @Override
     public void deleteAssessmentBooking(Integer bookingId) {

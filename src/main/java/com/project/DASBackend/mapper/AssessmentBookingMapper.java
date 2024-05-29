@@ -1,16 +1,23 @@
 package com.project.DASBackend.mapper;
 
 import com.project.DASBackend.dto.AssessmentBookingDto;
+import com.project.DASBackend.dto.BookingSampleDto;
 import com.project.DASBackend.entity.Account;
 import com.project.DASBackend.entity.AssessmentBooking;
 import com.project.DASBackend.entity.AssessmentRequest;
-import com.project.DASBackend.entity.Services;
+import com.project.DASBackend.entity.BookingSample;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AssessmentBookingMapper {
     public static AssessmentBookingDto toDto(AssessmentBooking booking) {
         if (booking == null) {
             return null;
         }
+        List<BookingSampleDto> bookingSamples = booking.getBookingSamples().stream()
+                .map(BookingSampleMapper::toDto)
+                .collect(Collectors.toList());
         return new AssessmentBookingDto(
                 booking.getBookingId(),
                 booking.getQuantity(),
@@ -22,12 +29,12 @@ public class AssessmentBookingMapper {
                 booking.getPaymentStatus(),
                 booking.getStatus(),
                 booking.getAccount().getAccountId(),
-                booking.getRequest().getRequestId()
+                booking.getRequest().getRequestId(),
+                bookingSamples
         );
     }
 
-//    public static AssessmentBooking toEntity(AssessmentBookingDto bookingDto, Account account, AssessmentRequest request, Services service) {
-public static AssessmentBooking toEntity(AssessmentBookingDto bookingDto, Account account, AssessmentRequest request) {
+    public static AssessmentBooking toEntity(AssessmentBookingDto bookingDto, Account account, AssessmentRequest request) {
         if (bookingDto == null) {
             return null;
         }
@@ -43,6 +50,12 @@ public static AssessmentBooking toEntity(AssessmentBookingDto bookingDto, Accoun
         booking.setPaymentStatus(bookingDto.getPaymentStatus());
         booking.setAccount(account);
         booking.setRequest(request);
+
+        List<BookingSample> bookingSamples = bookingDto.getBookingSamples().stream()
+                .map(sampleDto -> BookingSampleMapper.toEntity(sampleDto, booking))
+                .collect(Collectors.toList());
+        booking.setBookingSamples(bookingSamples); // Thêm dòng này
+
         return booking;
     }
 }

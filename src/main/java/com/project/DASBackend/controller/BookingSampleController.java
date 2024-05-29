@@ -18,11 +18,11 @@ public class BookingSampleController {
 
     private BookingSampleService bookingSampleService;
 
-    @PostMapping
-    public ResponseEntity<BookingSampleDto> createBookingDetail(@RequestBody BookingSampleDto bookingSampleDto) {
-        BookingSampleDto savedBookingDetail = bookingSampleService.createBookingDetail(bookingSampleDto);
-        return new ResponseEntity<>(savedBookingDetail, HttpStatus.CREATED);
-    }
+//    @PostMapping
+//    public ResponseEntity<BookingSampleDto> createBookingDetail(@RequestBody BookingSampleDto bookingSampleDto) {
+//        BookingSampleDto savedBookingDetail = bookingSampleService.createBookingDetail(bookingSampleDto);
+//        return new ResponseEntity<>(savedBookingDetail, HttpStatus.CREATED);
+//    }
 
     @GetMapping("{id}")
     public ResponseEntity<BookingSampleDto> getBookingDetailById(@PathVariable("id") Integer bookingDetailId) {

@@ -64,7 +64,6 @@
 			<version>2.25.60</version>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>

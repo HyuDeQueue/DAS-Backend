@@ -3,6 +3,7 @@ package com.project.DASBackend.controller;
 import com.project.DASBackend.dto.AssessmentBookingDto;
 import com.project.DASBackend.service.AssessmentBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +16,17 @@ public class AssessmentBookingController {
     @Autowired
     private AssessmentBookingService assessmentBookingService;
 
+//    @PostMapping
+//    public ResponseEntity<String> createAssessmentBooking(AssessmentBookingDto assessmentBookingDto) {
+//        assessmentBookingService.createAssessmentBooking(assessmentBookingDto);
+//        return ResponseEntity.ok("Assessment booking created successfully");
+//    }
+
+
     @PostMapping
-    public ResponseEntity<String> createAssessmentBooking(AssessmentBookingDto assessmentBookingDto) {
-        assessmentBookingService.createAssessmentBooking(assessmentBookingDto);
-        return ResponseEntity.ok("Assessment booking created successfully");
+    public ResponseEntity<AssessmentBookingDto> createAssessmentBooking(@RequestBody AssessmentBookingDto assessmentBookingDto) {
+        AssessmentBookingDto createdAssessmentBooking = assessmentBookingService.createAssessmentBooking(assessmentBookingDto);
+        return new ResponseEntity<>(createdAssessmentBooking, HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")

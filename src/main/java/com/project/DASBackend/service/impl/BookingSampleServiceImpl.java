@@ -23,15 +23,15 @@ public class BookingSampleServiceImpl implements BookingSampleService {
     private BookingSampleRepository bookingSampleRepository;
     private AssessmentBookingRepository assessmentBookingRepository;
 
-    @Override
-    public BookingSampleDto createBookingDetail(BookingSampleDto bookingSampleDto) {
-        AssessmentBooking booking = assessmentBookingRepository.findById(bookingSampleDto.getBookingId())
-                .orElseThrow(() -> new ResourceNotFoundException("Assessment booking not found with given Id: " + bookingSampleDto.getBookingId()));
-
-        BookingSample bookingSample = BookingSampleMapper.toEntity(bookingSampleDto, booking);
-        BookingSample savedBookingSample = bookingSampleRepository.save(bookingSample);
-        return BookingSampleMapper.toDto(savedBookingSample);
-    }
+//    @Override
+//    public BookingSampleDto createBookingDetail(BookingSampleDto bookingSampleDto) {
+//        AssessmentBooking booking = assessmentBookingRepository.findById(bookingSampleDto.getBookingId())
+//                .orElseThrow(() -> new ResourceNotFoundException("Assessment booking not found with given Id: " + bookingSampleDto.getBookingId()));
+//
+//        BookingSample bookingSample = BookingSampleMapper.toEntity(bookingSampleDto, booking);
+//        BookingSample savedBookingSample = bookingSampleRepository.save(bookingSample);
+//        return BookingSampleMapper.toDto(savedBookingSample);
+//    }
 
     @Override
     public BookingSampleDto getBookingDetailById(Integer bookingDetailId) {

@@ -3,6 +3,7 @@ package com.project.DASBackend.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,5 +23,5 @@ public class AssessmentBookingDto {
     private Integer status;
     private Integer accountId;
     private Integer requestId;
-
+    private List<BookingSampleDto> bookingSamples;
 }
