@@ -14,4 +14,6 @@ public interface AssessmentRequestService {
     AssessmentRequestDto updateAssessmentRequest(AssessmentRequestDto assessmentRequestDto, Integer requestId);
 
     void deleteAssessmentRequest(Integer requestId);
+
+    void changeStatus(Integer requestId, Integer status);
 }

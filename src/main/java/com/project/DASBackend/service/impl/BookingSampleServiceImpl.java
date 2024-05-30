@@ -72,4 +72,12 @@ public class BookingSampleServiceImpl implements BookingSampleService {
                 .orElseThrow(() -> new ResourceNotFoundException("Booking detail not found with given Id: " + bookingDetailId));
         bookingSampleRepository.delete(bookingSample);
     }
+
+    @Override
+    public void changeStatus(Integer bookingDetailId, Integer status) {
+        BookingSample bookingSample = bookingSampleRepository.findById(bookingDetailId)
+                .orElseThrow(() -> new ResourceNotFoundException("Booking detail not found with given Id: " + bookingDetailId));
+        bookingSample.setStatus(status);
+        bookingSampleRepository.save(bookingSample);
+    }
 }
