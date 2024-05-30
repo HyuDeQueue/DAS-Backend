@@ -20,6 +20,9 @@ public class Account {
     @Column(name = "Account_Id")
     private Integer accountId;
 
+    @Column(name = "Uid", nullable = false, unique = true)
+    private String uid;
+
     @Column(name = "Email", nullable = false, unique = true)
     private String email;
 

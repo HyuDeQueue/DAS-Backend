@@ -1,14 +1,21 @@
 package com.project.DASBackend.config;
 
+import com.project.DASBackend.filter.FirebaseTokenFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.Map;
 
@@ -16,33 +23,27 @@ import java.util.Map;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
+    private FirebaseTokenFilter firebaseTokenFilter;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests
-                                .requestMatchers("/login**", "/oauth2/**").permitAll()
-                                .anyRequest().authenticated()
+                .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for simplicity, enable it in production
+                .authorizeHttpRequests(authz -> authz
+                        .requestMatchers("/api/login").permitAll() // Allow access to login endpoint
+                        .anyRequest().authenticated() // Protect other endpoints
                 )
-                .oauth2Login(oauth2Login ->
-                        oauth2Login
-                                .defaultSuccessUrl("/loginSuccess")
-                                .userInfoEndpoint(userInfoEndpoint ->
-                                        userInfoEndpoint
-                                                .userService(this.oauth2UserService())
-                                )
-                );
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Create session if required
+                )
+                .addFilterBefore(firebaseTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    private OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService() {
-        DefaultOAuth2UserService delegate = new DefaultOAuth2UserService();
-        return userRequest -> {
-            OAuth2User oauth2User = delegate.loadUser(userRequest);
-            Map<String, Object> attributes = oauth2User.getAttributes();
-            // Handle the attributes
-            return oauth2User;
-        };
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/api/login"); // Ignore security for login endpoint
     }
 }

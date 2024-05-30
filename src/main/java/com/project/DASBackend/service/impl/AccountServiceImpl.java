@@ -49,6 +49,7 @@ public class AccountServiceImpl implements AccountService {
 
         account.setEmail(updatedAccountDto.getEmail());
         account.setDisplayName(updatedAccountDto.getDisplayName());
+        account.setUid(updatedAccountDto.getUid());
         account.setAccountStatus(updatedAccountDto.getAccountStatus());
         account.setRole(updatedAccountDto.getRole());
 

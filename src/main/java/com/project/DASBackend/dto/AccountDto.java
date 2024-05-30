@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 public class AccountDto {
     private Integer accountId;
+    private String uid;
     private String email;
     private String displayName;
     private Integer accountStatus;

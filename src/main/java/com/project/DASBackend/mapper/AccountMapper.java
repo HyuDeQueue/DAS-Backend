@@ -10,6 +10,7 @@ public class AccountMapper {
         }
         return new AccountDto(
                 account.getAccountId(),
+                account.getUid(),
                 account.getEmail(),
                 account.getDisplayName(),
                 account.getAccountStatus(),
@@ -23,6 +24,7 @@ public class AccountMapper {
         }
         Account account = new Account();
         account.setAccountId(accountDto.getAccountId());
+        account.setUid(accountDto.getUid());
         account.setEmail(accountDto.getEmail());
         account.setDisplayName(accountDto.getDisplayName());
         account.setAccountStatus(accountDto.getAccountStatus());
