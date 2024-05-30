@@ -23,20 +23,9 @@ public class Account {
     @Column(name = "Email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "First_Name", nullable = false)
-    private String firstName;
+    @Column(name = "Display_name", nullable = false)
+    private String displayName;
 
-    @Column(name = "Last_Name", nullable = false)
-    private String lastName;
-
-    @Column(name = "Google_access_token", nullable = false)
-    private String googleAccessToken;
-
-    @Column(name = "Refresh_token", nullable = false)
-    private String refreshToken;
-
-    @Column(name = "Access_token_expiry_time", nullable = false)
-    private LocalDateTime accessTokenExpiryTime;
 
     @Column(name = "Account_status", nullable = false)
     private Integer accountStatus;

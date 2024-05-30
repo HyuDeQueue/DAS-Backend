@@ -48,11 +48,7 @@ public class AccountServiceImpl implements AccountService {
                         () -> new ResourceNotFoundException("Account is not exist with given Id: " + accountId));
 
         account.setEmail(updatedAccountDto.getEmail());
-        account.setFirstName(updatedAccountDto.getFirstName());
-        account.setLastName(updatedAccountDto.getLastName());
-        account.setGoogleAccessToken(updatedAccountDto.getGoogleAccessToken());
-        account.setRefreshToken(updatedAccountDto.getRefreshToken());
-        account.setAccessTokenExpiryTime(updatedAccountDto.getAccessTokenExpiryTime());
+        account.setDisplayName(updatedAccountDto.getDisplayName());
         account.setAccountStatus(updatedAccountDto.getAccountStatus());
         account.setRole(updatedAccountDto.getRole());
 
