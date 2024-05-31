@@ -43,5 +43,10 @@ public class AssessmentRequestController {
         return new ResponseEntity<>("Assessment request deleted successfully", HttpStatus.OK);
     }
 
+    @PutMapping("{id}/status")
+    public ResponseEntity<Void> changeAssessmentRequestStatus(@PathVariable("id") Integer requestId, @RequestParam("status") Integer status) {
+        assessmentRequestService.changeStatus(requestId, status);
+        return ResponseEntity.noContent().build();
+    }
 
 }

@@ -10,4 +10,5 @@ public interface BookingSampleService {
     List<BookingSampleDto> getAllBookingDetails();
     BookingSampleDto updateBookingDetail(Integer bookingDetailId, BookingSampleDto bookingSampleDto);
     void deleteBookingDetail(Integer bookingDetailId);
+    void changeStatus(Integer bookingDetailId, Integer status);
 }

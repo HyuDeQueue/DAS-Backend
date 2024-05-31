@@ -49,4 +49,10 @@ public class ServiceController {
         serviceService.DeleteService(serviceID);
         return ResponseEntity.ok("Employee deleted successfully");
     }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Void> changeServiceStatus(@PathVariable("id") Integer serviceId, @RequestParam("status") Integer status) {
+        serviceService.changeStatus(serviceId, status);
+        return ResponseEntity.noContent().build();
+    }
 }
