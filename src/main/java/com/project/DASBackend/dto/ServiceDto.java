@@ -12,5 +12,6 @@ public class ServiceDto {
     private Integer serviceId;
     private String serviceName;
     private String serviceDescription;
+    private Integer servicePrice;
     private Integer serviceStatus;
 }
