@@ -12,12 +12,9 @@ import java.time.LocalDateTime;
 @Builder
 public class AccountDto {
     private Integer accountId;
+    private String uid;
     private String email;
-    private String firstName;
-    private String lastName;
-    private String googleAccessToken;
-    private String refreshToken;
-    private LocalDateTime accessTokenExpiryTime;
+    private String displayName;
     private Integer accountStatus;
     private Integer role;
 }

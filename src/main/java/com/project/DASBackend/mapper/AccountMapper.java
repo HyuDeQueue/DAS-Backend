@@ -10,12 +10,9 @@ public class AccountMapper {
         }
         return new AccountDto(
                 account.getAccountId(),
+                account.getUid(),
                 account.getEmail(),
-                account.getFirstName(),
-                account.getLastName(),
-                account.getGoogleAccessToken(),
-                account.getRefreshToken(),
-                account.getAccessTokenExpiryTime(),
+                account.getDisplayName(),
                 account.getAccountStatus(),
                 account.getRole()
         );
@@ -27,12 +24,9 @@ public class AccountMapper {
         }
         Account account = new Account();
         account.setAccountId(accountDto.getAccountId());
+        account.setUid(accountDto.getUid());
         account.setEmail(accountDto.getEmail());
-        account.setFirstName(accountDto.getFirstName());
-        account.setLastName(accountDto.getLastName());
-        account.setGoogleAccessToken(accountDto.getGoogleAccessToken());
-        account.setRefreshToken(accountDto.getRefreshToken());
-        account.setAccessTokenExpiryTime(accountDto.getAccessTokenExpiryTime());
+        account.setDisplayName(accountDto.getDisplayName());
         account.setAccountStatus(accountDto.getAccountStatus());
         account.setRole(accountDto.getRole());
         return account;
