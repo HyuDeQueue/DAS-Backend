@@ -115,4 +115,13 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
                         () -> new ResourceNotFoundException("Assessment booking not found with given Id: " + bookingId));
         assessmentBookingRepository.deleteById(bookingId);
     }
+
+    @Override
+    public void changeStatus(Integer bookingId, Integer status) {
+        AssessmentBooking assessmentBooking = assessmentBookingRepository.findById(bookingId)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Assessment booking not found with given Id: " + bookingId));
+        assessmentBooking.setStatus(status);
+        assessmentBookingRepository.save(assessmentBooking);
+    }
 }

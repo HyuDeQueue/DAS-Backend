@@ -59,4 +59,12 @@ public class ServiceServiceImpl implements ServiceService {
                 .orElseThrow(() -> new RuntimeException("Service is not exist with given Id:"+serviceId));
         serviceRepository.deleteById(serviceId);
     }
+
+    @Override
+    public void changeStatus(Integer serviceId, Integer status) {
+        Services services=serviceRepository.findById(serviceId)
+                .orElseThrow(() -> new RuntimeException("Service is not exist with given Id:"+serviceId));
+        services.setServiceStatus(status);
+        serviceRepository.save(services);
+    }
 }

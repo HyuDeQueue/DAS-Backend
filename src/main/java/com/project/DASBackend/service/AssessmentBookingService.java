@@ -15,4 +15,6 @@ public interface AssessmentBookingService {
     AssessmentBookingDto updateAssessmentBooking(AssessmentBookingDto updatedAssessmentBookingDto, Integer bookingId);
 
     void deleteAssessmentBooking(Integer bookingId);
+
+    void changeStatus(Integer bookingId, Integer status);
 }
