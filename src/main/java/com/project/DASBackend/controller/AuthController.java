@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-import static com.fasterxml.jackson.databind.type.LogicalType.Map;
-
 @RestController
 @RequestMapping("/api")
 public class AuthController {
@@ -38,24 +36,26 @@ public class AuthController {
                 String email = decodedToken.getEmail();
                 String displayName = decodedToken.getName();
 
-                Account existingAccount = accountRepository.findByUid(uid);
-                if (existingAccount == null) {
-                    Account newAccount = Account.builder()
+                Account account = accountRepository.findByUid(uid);
+                if (account == null) {
+                    account = Account.builder()
                             .uid(uid)
                             .email(email)
                             .displayName(displayName)
                             .accountStatus(1)
                             .role(1)
                             .build();
-                    accountRepository.save(newAccount);
+                    accountRepository.save(account);
                 }
 
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
                 String sessionId = authentication.getDetails().toString();
-                
 
-                // Return session ID as JSON object
-                return ResponseEntity.ok(java.util.Map.of("sessionId", sessionId));
+                // Return session ID and account details as JSON object
+                return ResponseEntity.ok(Map.of(
+                        "sessionId", sessionId,
+                        "account", account
+                ));
             } catch (FirebaseAuthException e) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error verifying token: " + e.getMessage());
             }
