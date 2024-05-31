@@ -88,4 +88,13 @@ public class AssessmentRequestServiceImpl implements AssessmentRequestService {
                         () -> new ResourceNotFoundException("Assessment request not found with the given ID: "+requestId));
         assessmentRequestRepository.deleteById(requestId);
     }
+
+    @Override
+    public void changeStatus(Integer requestId, Integer status) {
+        AssessmentRequest assessmentRequest = assessmentRequestRepository.findById(requestId)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Assessment request not found with the given ID: "+requestId));
+        assessmentRequest.setStatus(status);
+        assessmentRequestRepository.save(assessmentRequest);
+    }
 }

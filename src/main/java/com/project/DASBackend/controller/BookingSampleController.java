@@ -48,4 +48,10 @@ public class BookingSampleController {
         bookingSampleService.deleteBookingDetail(bookingDetailId);
         return ResponseEntity.ok("Booking detail deleted successfully");
     }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Void> changeBookingSampleStatus(@PathVariable("id") Integer bookingSampleId, @RequestParam("status") Integer status) {
+        bookingSampleService.changeStatus(bookingSampleId, status);
+        return ResponseEntity.noContent().build();
+    }
 }
