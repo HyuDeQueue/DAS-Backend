@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin("*")
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/bookingDetails")
+@RequestMapping("/api/bookingsamples")
 public class BookingSampleController {
 
     private BookingSampleService bookingSampleService;

@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin("*")
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/commitmentPapers")
+@RequestMapping("/api/commitmentpapers")
 public class CommitmentPaperController {
 
     private CommitmentPaperService commitmentPaperService;
