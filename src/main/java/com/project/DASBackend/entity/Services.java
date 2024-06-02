@@ -9,8 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "Service")
-@Data
-@Builder
 public class Services {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

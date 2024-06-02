@@ -26,7 +26,6 @@ public class AssessmentRequestServiceImpl implements AssessmentRequestService {
 
     @Override
     public AssessmentRequestDto createAssessmentRequest(AssessmentRequestDto assessmentRequestDto) {
-        // Fetch Account and Service objects based on identifiers from the DTO (e.g., accountId, serviceId)
         Account account = accountRepository.findById(assessmentRequestDto.getAccountId())
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
         Services service = serviceRepository.findById(assessmentRequestDto.getServiceId())

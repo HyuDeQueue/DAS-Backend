@@ -14,7 +14,6 @@ import java.util.List;
 //@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/services")
-@AllArgsConstructor
 public class ServiceController {
 
     @Autowired

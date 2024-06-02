@@ -25,7 +25,7 @@ public class ServiceServiceImpl implements ServiceService {
     public ServiceDto createService(ServiceDto serviceDto) {
         Services services= ServiceMapper.toEntity(serviceDto);
         Services saveService = serviceRepository.save(services);
-        return ServiceMapper.toDto((Services) saveService);
+        return ServiceMapper.toDto(saveService);
     }
 
     @Override
