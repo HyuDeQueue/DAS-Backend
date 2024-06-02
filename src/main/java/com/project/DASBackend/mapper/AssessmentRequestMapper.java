@@ -12,6 +12,7 @@ public class AssessmentRequestMapper {
         }
         return new AssessmentRequestDto(
                 request.getRequestId(),
+                request.getName(),
                 request.getPhone(),
                 request.getNumberOfSamples(),
                 request.getDateCreated(),
@@ -29,6 +30,7 @@ public class AssessmentRequestMapper {
         }
         AssessmentRequest request = new AssessmentRequest();
         request.setRequestId(requestDto.getRequestId());
+        request.setName(requestDto.getName());
         request.setPhone(requestDto.getPhone());
         request.setNumberOfSamples(requestDto.getNumberOfSamples());
         request.setDateCreated(requestDto.getDateCreated());

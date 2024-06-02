@@ -20,6 +20,9 @@ public class AssessmentRequest {
     @Column(name = "Request_Id")
     private Integer requestId;
 
+    @Column(name = "Name", nullable = false)
+    private String name;
+
     @Column(name = "Phone", nullable = false)
     private String phone;
 

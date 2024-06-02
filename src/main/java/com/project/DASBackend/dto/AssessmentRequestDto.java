@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AssessmentRequestDto {
     private Integer requestId;
+    private String name;
     private String phone;
     private Integer numberOfSamples;
     private LocalDateTime dateCreated;
