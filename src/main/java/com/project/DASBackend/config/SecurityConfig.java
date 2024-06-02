@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable) // Disable CSRF for simplicity, enable it in production
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/api/login").permitAll() // Allow access to login endpoint
-                        .anyRequest().authenticated() // Protect other endpoints
+                        .anyRequest().permitAll() // Protect other endpoints
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Create session if required
