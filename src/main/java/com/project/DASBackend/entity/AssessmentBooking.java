@@ -35,10 +35,10 @@ public class AssessmentBooking {
     @Column(name = "Feedback")
     private String feedback;
 
-    @Column(name = "Payment_type", nullable = false)
+    @Column(name = "Payment_type")
     private Integer paymentType;
 
-    @Column(name = "Payment_status", nullable = false)
+    @Column(name = "Payment_status")
     private Integer paymentStatus;
 
     @Column(name = "status", nullable = false)

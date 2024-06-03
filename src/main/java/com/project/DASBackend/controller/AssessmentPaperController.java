@@ -18,7 +18,7 @@ public class AssessmentPaperController {
     private AssessmentPaperService assessmentPaperService;
 
     @PostMapping
-    public ResponseEntity<AssessmentPaperDto> createAssessmentPaper(AssessmentPaperDto assessmentPaperDto){
+    public ResponseEntity<AssessmentPaperDto> createAssessmentPaper(@RequestBody AssessmentPaperDto assessmentPaperDto){
         return new ResponseEntity<>(assessmentPaperService.createAssessmentPaper(assessmentPaperDto), HttpStatus.CREATED);
     }
 

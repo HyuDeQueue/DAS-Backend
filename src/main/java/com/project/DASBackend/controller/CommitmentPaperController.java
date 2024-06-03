@@ -19,7 +19,7 @@ public class CommitmentPaperController {
     private CommitmentPaperService commitmentPaperService;
 
     @PostMapping
-    public ResponseEntity<CommitmentPaperDto> createCommitmentPaper(CommitmentPaperDto commitmentPaperDto){
+    public ResponseEntity<CommitmentPaperDto> createCommitmentPaper(@RequestBody CommitmentPaperDto commitmentPaperDto){
         CommitmentPaperDto savedCommitmentPaperDto = commitmentPaperService.createCommitmentPaper(commitmentPaperDto);
         return new ResponseEntity<>(savedCommitmentPaperDto, HttpStatus.CREATED);
     }
