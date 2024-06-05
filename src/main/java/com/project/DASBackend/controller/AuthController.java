@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseToken;
 import com.project.DASBackend.entity.Account;
 import com.project.DASBackend.repository.AccountRepository;
 import com.project.DASBackend.service.AccountService;
+import com.project.DASBackend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,9 @@ public class AuthController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @PostMapping("/login")
     public ResponseEntity<?> loginWithFirebaseToken(@RequestHeader("Authorization") String authorizationHeader) {
@@ -48,13 +52,21 @@ public class AuthController {
                     accountRepository.save(account);
                 }
 
-                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                String sessionId = authentication.getDetails().toString();
+               Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//                String sessionId = authentication.getDetails().toString();
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                String jwtToken = jwtUtil.generateToken(uid);
+
+                return ResponseEntity.ok(Map.of(
+                        "jwtToken", jwtToken,
+                        "account", account
+
+
 
                 // Return session ID and account details as JSON object
-                return ResponseEntity.ok(Map.of(
-                        "sessionId", sessionId,
-                        "account", account
+//                return ResponseEntity.ok(Map.of(
+//                        "sessionId", sessionId,
+//                        "account", account
                 ));
             } catch (FirebaseAuthException e) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error verifying token: " + e.getMessage());
