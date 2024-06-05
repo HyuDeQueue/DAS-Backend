@@ -19,12 +19,13 @@ public class ServicePriceListServiceImpl implements ServicePriceListService {
 
     @Autowired
     private ServiceRepository serviceRepository;
+    @Autowired
     private ServicePriceListRepository servicePriceListRepository;
     @Override
     public ServicePriceListDto createServicePriceList(ServicePriceListDto servicePriceListDto) {
-        Services services = serviceRepository.findById(servicePriceListDto.getServiceId())
-                .orElseThrow(() -> new RuntimeException("Service is not exist with given Id:" + servicePriceListDto.getServiceId()));
-        ServicePriceList servicePriceList = ServicePriceListMapper.toEntity(servicePriceListDto, services);
+//        Services services = serviceRepository.findById(servicePriceListDto.getServiceId())
+//                .orElseThrow(() -> new RuntimeException("Service is not exist with given Id:" + servicePriceListDto.getServiceId()));
+        ServicePriceList servicePriceList = ServicePriceListMapper.toEntity(servicePriceListDto /*, services*/);
         ServicePriceList saveServicePriceList = servicePriceListRepository.save(servicePriceList);
         return ServicePriceListMapper.toDto(saveServicePriceList);
     }
@@ -46,11 +47,11 @@ public class ServicePriceListServiceImpl implements ServicePriceListService {
     public ServicePriceListDto updateServicePriceList(Integer servicePriceListId, ServicePriceListDto updatedServicePriceListDto) {
         ServicePriceList servicePriceList = servicePriceListRepository.findById(servicePriceListId)
                 .orElseThrow(() -> new RuntimeException("Service price list is not exist with given Id:" + servicePriceListId));
-        if(updatedServicePriceListDto.getServiceId() != null){
-            Services services = serviceRepository.findById(updatedServicePriceListDto.getServiceId())
-                    .orElseThrow(() -> new RuntimeException("Service is not exist with given Id:" + updatedServicePriceListDto.getServiceId()));
-            servicePriceList.setService(services);
-        }
+//        if(updatedServicePriceListDto.getServiceId() != null){
+//            Services services = serviceRepository.findById(updatedServicePriceListDto.getServiceId())
+//                    .orElseThrow(() -> new RuntimeException("Service is not exist with given Id:" + updatedServicePriceListDto.getServiceId()));
+//            servicePriceList.setService(services);
+//        }
         servicePriceList.setSizeFrom(updatedServicePriceListDto.getSizeFrom());
         servicePriceList.setSizeTo(updatedServicePriceListDto.getSizeTo());
         servicePriceList.setInitPrice(updatedServicePriceListDto.getInitPrice());

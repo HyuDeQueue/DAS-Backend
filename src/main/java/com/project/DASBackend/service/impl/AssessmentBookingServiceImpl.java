@@ -38,17 +38,27 @@ public class AssessmentBookingServiceImpl implements AssessmentBookingService {
 
         // Lưu các BookingSample
         List<BookingSample> bookingSamples = assessmentBookingDto.getBookingSamples().stream()
-                .map(sampleDto -> BookingSampleMapper.toEntity(sampleDto, assessmentBooking))
+                .map(sampleDto -> {
+                    BookingSample bookingSample = BookingSampleMapper.toEntity(sampleDto, assessmentBooking);
+                    bookingSample.setStatus(1); // set default status to 1
+                    bookingSample.setIsDiamond(1); // set default isDiamond to 1
+                    return bookingSample;
+                })
                 .collect(Collectors.toList());
         assessmentBooking.setBookingSamples(bookingSamples);
 
         AssessmentBooking savedAssessmentBooking = assessmentBookingRepository.save(assessmentBooking);
 
-        // Lưu các BookingSample vào repository
-        bookingSamples.forEach(bookingSampleRepository::save);
+        // Gán bookingId cho từng BookingSample sau khi tạo Booking
+        bookingSamples.forEach(sample -> {
+            sample.setBooking(savedAssessmentBooking);
+            bookingSampleRepository.save(sample);
+        });
 
         return AssessmentBookingMapper.toDto(savedAssessmentBooking);
     }
+
+
 
 
 

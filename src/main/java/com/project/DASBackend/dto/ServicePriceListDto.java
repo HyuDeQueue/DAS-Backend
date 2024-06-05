@@ -14,5 +14,4 @@ public class ServicePriceListDto {
     private Float sizeTo;
     private Integer initPrice;
     private Integer priceUnit;
-    private Integer serviceId;
 }
