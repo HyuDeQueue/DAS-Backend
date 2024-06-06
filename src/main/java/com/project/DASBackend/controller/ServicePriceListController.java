@@ -2,6 +2,7 @@ package com.project.DASBackend.controller;
 
 import com.project.DASBackend.dto.ServicePriceListDto;
 import com.project.DASBackend.service.ServicePriceListService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class ServicePriceListController {
     private ServicePriceListService servicePriceListService;
 
     @PostMapping
-    public ResponseEntity<ServicePriceListDto> createServicePriceList(@RequestBody ServicePriceListDto servicePriceListDto) {
+    public ResponseEntity<ServicePriceListDto> createServicePriceList(@Valid @RequestBody ServicePriceListDto servicePriceListDto) {
         servicePriceListDto = servicePriceListService.createServicePriceList(servicePriceListDto);
         return new ResponseEntity<>(servicePriceListDto, HttpStatus.CREATED);
     }
@@ -36,7 +37,7 @@ public class ServicePriceListController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<ServicePriceListDto> updateServicePriceList(@RequestBody ServicePriceListDto servicePriceListDto,
+    public ResponseEntity<ServicePriceListDto> updateServicePriceList(@Valid @RequestBody ServicePriceListDto servicePriceListDto,
                                                                       @PathVariable("id") Integer servicePriceListId) {
         return ResponseEntity.ok(servicePriceListService.updateServicePriceList(servicePriceListId, servicePriceListDto));
     }

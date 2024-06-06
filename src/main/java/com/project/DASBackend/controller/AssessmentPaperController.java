@@ -3,6 +3,7 @@ package com.project.DASBackend.controller;
 import com.project.DASBackend.dto.AssessmentPaperDto;
 import com.project.DASBackend.entity.AssessmentPaper;
 import com.project.DASBackend.service.AssessmentPaperService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class AssessmentPaperController {
     private AssessmentPaperService assessmentPaperService;
 
     @PostMapping
-    public ResponseEntity<AssessmentPaperDto> createAssessmentPaper(@RequestBody AssessmentPaperDto assessmentPaperDto){
+    public ResponseEntity<AssessmentPaperDto> createAssessmentPaper(@Valid @RequestBody AssessmentPaperDto assessmentPaperDto){
         return new ResponseEntity<>(assessmentPaperService.createAssessmentPaper(assessmentPaperDto), HttpStatus.CREATED);
     }
 
@@ -35,7 +36,7 @@ public class AssessmentPaperController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AssessmentPaperDto> updateAssessmentPaper(@RequestBody AssessmentPaperDto assessmentPaperDto,
+    public ResponseEntity<AssessmentPaperDto> updateAssessmentPaper(@Valid @RequestBody AssessmentPaperDto assessmentPaperDto,
                                                                       @PathVariable("id") Integer paperId){
         return ResponseEntity.ok(assessmentPaperService.updateAssessmentPaper(assessmentPaperDto, paperId));
     }
