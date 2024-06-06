@@ -58,11 +58,6 @@ public class SecurityConfig {
         return (web) -> web.ignoring().requestMatchers("/api/login"); // Ignore security for login endpoint
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
 
 }
 

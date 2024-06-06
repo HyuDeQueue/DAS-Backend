@@ -1,7 +1,5 @@
 package com.project.DASBackend.controller;
 
-import java.util.Objects;
-
 
 import com.project.DASBackend.dto.AccountDto;
 import com.project.DASBackend.dto.JwtRequest;
@@ -47,10 +45,10 @@ public class JwtAuthenticationController {
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
 
-        authenticate(authenticationRequest.getUsername(),"");
+        authenticate(authenticationRequest.getUid());
 
         final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
+                .loadUserByUsername(authenticationRequest.getUid());
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
@@ -58,9 +56,9 @@ public class JwtAuthenticationController {
     }
 
 
-    private void authenticate(String username, String password) throws Exception {
+    private void authenticate(String username) throws Exception {
         try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username,""));
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
