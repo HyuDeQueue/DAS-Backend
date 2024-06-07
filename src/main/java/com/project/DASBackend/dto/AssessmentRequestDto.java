@@ -34,8 +34,6 @@ public class AssessmentRequestDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "UTC")
     private LocalDateTime dateCreated;
 
-    @NotNull(message = "Meeting time cannot be null")
-    private String meetingTime;
 
     @NotNull(message = "Meeting date cannot be null")
     @FutureOrPresent(message = "Meeting date must be in the future or present")
