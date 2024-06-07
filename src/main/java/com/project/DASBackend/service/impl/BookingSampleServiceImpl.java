@@ -80,4 +80,12 @@ public class BookingSampleServiceImpl implements BookingSampleService {
         bookingSample.setStatus(status);
         bookingSampleRepository.save(bookingSample);
     }
+
+    @Override
+    public List<BookingSampleDto> getBookingSamplesByBookingId(Integer bookingId) {
+        List<BookingSample> bookingSamples = bookingSampleRepository.findByBookingBookingId(bookingId);
+        return bookingSamples.stream()
+                .map(BookingSampleMapper::toDto)
+                .collect(Collectors.toList());
+    }
 }

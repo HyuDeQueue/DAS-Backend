@@ -54,4 +54,10 @@ public class BookingSampleController {
         bookingSampleService.changeStatus(bookingSampleId, status);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/byBooking/{bookingId}")
+    public ResponseEntity<List<BookingSampleDto>> getBookingSamplesByBookingId(@PathVariable("bookingId") Integer bookingId) {
+        List<BookingSampleDto> bookingSampleDtos = bookingSampleService.getBookingSamplesByBookingId(bookingId);
+        return ResponseEntity.ok(bookingSampleDtos);
+    }
 }
