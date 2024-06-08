@@ -2,6 +2,7 @@ package com.project.DASBackend.controller;
 
 import com.project.DASBackend.dto.AccountDto;
 import com.project.DASBackend.service.AccountService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class AccountController {
     private AccountService accountService;
 
     @PostMapping
-    public ResponseEntity<AccountDto> createAccount(@RequestBody AccountDto accountDto){
+    public ResponseEntity<AccountDto> createAccount(@Valid @RequestBody AccountDto accountDto){
         return new ResponseEntity<>(accountService.createAccount(accountDto), HttpStatus.CREATED);
     }
 
@@ -36,7 +37,7 @@ public class AccountController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AccountDto> updateAccount(@RequestBody AccountDto accountDto,
+    public ResponseEntity<AccountDto> updateAccount(@Valid @RequestBody AccountDto accountDto,
                                                     @PathVariable("id") Integer accountId){
         return ResponseEntity.ok(accountService.updateAccount(accountId, accountDto));
     }
