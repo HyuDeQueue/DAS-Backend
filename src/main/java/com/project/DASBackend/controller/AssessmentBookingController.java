@@ -25,7 +25,7 @@ public class AssessmentBookingController {
 
 
     @PostMapping
-    public ResponseEntity<AssessmentBookingDto> createAssessmentBooking(@Valid @RequestBody AssessmentBookingDto assessmentBookingDto) {
+    public ResponseEntity<AssessmentBookingDto> createAssessmentBooking(@RequestBody AssessmentBookingDto assessmentBookingDto) {
         AssessmentBookingDto createdAssessmentBooking = assessmentBookingService.createAssessmentBooking(assessmentBookingDto);
         return new ResponseEntity<>(createdAssessmentBooking, HttpStatus.CREATED);
     }

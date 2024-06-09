@@ -15,7 +15,6 @@ import java.util.List;
 @Builder
 public class AssessmentBookingDto {
 
-    @NotNull(message = "Booking ID cannot be null")
     private Integer bookingId;
 
     @NotNull(message = "Quantity cannot be null")

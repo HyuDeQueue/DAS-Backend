@@ -18,7 +18,7 @@ public class AssessmentRequestController {
     private AssessmentRequestService assessmentRequestService;
 
     @PostMapping
-    public ResponseEntity<AssessmentRequestDto> createAssessmentRequest(@Valid @RequestBody AssessmentRequestDto assessmentRequestDto) {
+    public ResponseEntity<AssessmentRequestDto> createAssessmentRequest(@RequestBody AssessmentRequestDto assessmentRequestDto) {
         return new ResponseEntity<>(assessmentRequestService.createAssessmentRequest(assessmentRequestDto), HttpStatus.CREATED);
     }
 
