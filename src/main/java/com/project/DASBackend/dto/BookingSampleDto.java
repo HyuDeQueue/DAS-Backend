@@ -13,7 +13,6 @@ import lombok.*;
 @Data
 public class BookingSampleDto {
 
-    @NotNull(message = "Sample ID cannot be null")
     private Integer sampleId;
 
     @NotNull(message = "isDiamond cannot be null")

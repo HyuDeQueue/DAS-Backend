@@ -17,7 +17,6 @@ public class AssessmentBookingDto {
 
     private Integer bookingId;
 
-    @NotNull(message = "Quantity cannot be null")
     @Min(value = 1, message = "Quantity must be greater than or equal to 1")
     private Integer quantity;
 

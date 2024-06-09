@@ -13,7 +13,6 @@ import lombok.*;
 @Builder
 public class ServiceDto {
 
-    @NotNull(message = "Service ID cannot be null")
     @Min(value = 0, message = "Service ID must be greater than or equal to 0")
     private Integer serviceId;
 

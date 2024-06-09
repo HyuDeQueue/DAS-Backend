@@ -15,7 +15,6 @@ import jakarta.validation.constraints.NotNull;
 @Builder
 public class AccountDto {
 
-    @NotNull(message = "Account ID cannot be null")
     private Integer accountId;
 
     @NotBlank(message = "UID cannot be blank")

@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AssessmentRequestDto {
 
-    @NotNull(message = "Request ID cannot be null")
     @Min(value = 0, message = "Request ID must be greater than or equal to 0")
     private Integer requestId;
 

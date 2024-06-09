@@ -12,7 +12,6 @@ import lombok.*;
 @AllArgsConstructor
 public class ServicePriceListDto {
 
-    @NotNull(message = "Service price ID cannot be null")
     private Integer servicePriceId;
 
     @NotNull(message = "Service ID cannot be null")

@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 @Data
 public class AssessmentPaperDto {
 
-    @NotNull(message = "Diamond ID cannot be null")
     private Integer diamondId;
 
     @NotBlank(message = "Type cannot be blank")

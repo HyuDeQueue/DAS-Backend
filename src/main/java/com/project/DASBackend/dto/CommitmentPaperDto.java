@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Data
 public class CommitmentPaperDto {
 
-    @NotNull(message = "Commitment ID cannot be null")
     private Integer commitmentId;
 
     @NotNull(message = "Date created cannot be null")
