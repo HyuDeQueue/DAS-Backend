@@ -1,4 +1,4 @@
-package com.project.DASBackend.config;
+package com.project.DASBackend.filter;
 
 import com.project.DASBackend.service.impl.JwtUserDetailsService;
 import com.project.DASBackend.util.JwtTokenUtil;
@@ -18,7 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-class JwtRequestFilter extends OncePerRequestFilter {
+public class JwtRequestFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
 
