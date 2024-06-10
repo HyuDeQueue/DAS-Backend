@@ -2,6 +2,7 @@ package com.project.DASBackend.controller;
 
 import com.project.DASBackend.dto.AssessmentBookingDto;
 import com.project.DASBackend.service.AssessmentBookingService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +43,8 @@ public class AssessmentBookingController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<String> updateAssessmentBooking(@RequestBody AssessmentBookingDto updatedAssessmentBookingDto,
-                                                            @PathVariable("id") Integer bookingId) {
+    public ResponseEntity<String> updateAssessmentBooking(@Valid @RequestBody AssessmentBookingDto updatedAssessmentBookingDto,
+                                                          @PathVariable("id") Integer bookingId) {
         assessmentBookingService.updateAssessmentBooking(updatedAssessmentBookingDto, bookingId);
         return ResponseEntity.ok("Assessment booking updated successfully");
     }
@@ -55,7 +56,7 @@ public class AssessmentBookingController {
     }
 
     @PutMapping("{id}/changeStatus")
-    public ResponseEntity<String> changeStatus(@PathVariable("id") Integer bookingId, @RequestParam("status") Integer status) {
+    public ResponseEntity<String> changeStatus(@Valid @PathVariable("id") Integer bookingId, @RequestParam("status") Integer status) {
         assessmentBookingService.changeStatus(bookingId, status);
         return ResponseEntity.ok("Assessment booking status updated successfully");
     }

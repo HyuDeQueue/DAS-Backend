@@ -14,12 +14,12 @@ public class ServicePriceListMapper {
                 servicePriceList.getSizeFrom(),
                 servicePriceList.getSizeTo(),
                 servicePriceList.getInitPrice(),
-                servicePriceList.getPriceUnit(),
-                servicePriceList.getService().getServiceId()
+                servicePriceList.getPriceUnit()//,
+//                servicePriceList.getService().getServiceId()
         );
     }
 
-    public static ServicePriceList toEntity(ServicePriceListDto servicePriceListDto, Services services) {
+    public static ServicePriceList toEntity(ServicePriceListDto servicePriceListDto/*, Services services*/) {
         if (servicePriceListDto == null) {
             return null;
         }
@@ -29,7 +29,7 @@ public class ServicePriceListMapper {
         servicePriceList.setSizeTo(servicePriceListDto.getSizeTo());
         servicePriceList.setInitPrice(servicePriceListDto.getInitPrice());
         servicePriceList.setPriceUnit(servicePriceListDto.getPriceUnit());
-        servicePriceList.setService(services);
+//        servicePriceList.setService(services);
         return servicePriceList;
     }
 }

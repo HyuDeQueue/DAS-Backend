@@ -92,6 +92,7 @@ public class AssessmentPaper {
     private String transverseSection;
 
     @Column(name = "Seal_Id", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer sealId;
 
     @ManyToOne

@@ -30,7 +30,7 @@ public class ServicePriceList {
     @Column(name = "Price_unit", nullable = false)
     private Integer priceUnit;
 
-    @ManyToOne
-    @JoinColumn(name = "Service_Id", nullable = false)
-    private Services service;
+//    @ManyToOne
+//    @JoinColumn(name = "Service_Id", nullable = false)
+//    private Services service;
 }

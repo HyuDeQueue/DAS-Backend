@@ -1,5 +1,6 @@
 package com.project.DASBackend.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.project.DASBackend.dto.CommitmentPaperDto;
@@ -19,7 +20,7 @@ public class CommitmentPaperController {
     private CommitmentPaperService commitmentPaperService;
 
     @PostMapping
-    public ResponseEntity<CommitmentPaperDto> createCommitmentPaper(@RequestBody CommitmentPaperDto commitmentPaperDto){
+    public ResponseEntity<CommitmentPaperDto> createCommitmentPaper(@Valid @RequestBody CommitmentPaperDto commitmentPaperDto){
         CommitmentPaperDto savedCommitmentPaperDto = commitmentPaperService.createCommitmentPaper(commitmentPaperDto);
         return new ResponseEntity<>(savedCommitmentPaperDto, HttpStatus.CREATED);
     }
@@ -37,7 +38,7 @@ public class CommitmentPaperController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<CommitmentPaperDto> updateCommitment(@RequestBody CommitmentPaperDto commitmentPaperDto,
+    public ResponseEntity<CommitmentPaperDto> updateCommitment(@Valid @RequestBody CommitmentPaperDto commitmentPaperDto,
                                                                         @PathVariable("id") Integer commitmentPaperId) {
         return new ResponseEntity<>(commitmentPaperService.updateCommitmentPaper(commitmentPaperId, commitmentPaperDto), HttpStatus.OK);
     }

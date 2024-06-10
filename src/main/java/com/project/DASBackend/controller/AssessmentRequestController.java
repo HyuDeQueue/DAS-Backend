@@ -2,6 +2,7 @@ package com.project.DASBackend.controller;
 
 import com.project.DASBackend.dto.AssessmentRequestDto;
 import com.project.DASBackend.service.AssessmentRequestService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class AssessmentRequestController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AssessmentRequestDto> updateAssessmentRequest(@RequestBody AssessmentRequestDto assessmentRequestDto,
+    public ResponseEntity<AssessmentRequestDto> updateAssessmentRequest(@Valid @RequestBody AssessmentRequestDto assessmentRequestDto,
                                                                         @PathVariable("id") Integer requestId) {
         return new ResponseEntity<>(assessmentRequestService.updateAssessmentRequest(assessmentRequestDto, requestId), HttpStatus.OK);
     }

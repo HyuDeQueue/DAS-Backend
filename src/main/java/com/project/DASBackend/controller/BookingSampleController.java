@@ -1,5 +1,6 @@
 package com.project.DASBackend.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.project.DASBackend.dto.BookingSampleDto;
@@ -37,7 +38,7 @@ public class BookingSampleController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<BookingSampleDto> updateBookingDetail(@RequestBody BookingSampleDto bookingSampleDto,
+    public ResponseEntity<BookingSampleDto> updateBookingDetail(@Valid @RequestBody BookingSampleDto bookingSampleDto,
                                                                 @PathVariable("id") Integer bookingDetailId) {
         BookingSampleDto updatedBookingDetail = bookingSampleService.updateBookingDetail(bookingDetailId, bookingSampleDto);
         return ResponseEntity.ok(updatedBookingDetail);
@@ -53,5 +54,11 @@ public class BookingSampleController {
     public ResponseEntity<Void> changeBookingSampleStatus(@PathVariable("id") Integer bookingSampleId, @RequestParam("status") Integer status) {
         bookingSampleService.changeStatus(bookingSampleId, status);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/byBooking/{bookingId}")
+    public ResponseEntity<List<BookingSampleDto>> getBookingSamplesByBookingId(@PathVariable("bookingId") Integer bookingId) {
+        List<BookingSampleDto> bookingSampleDtos = bookingSampleService.getBookingSamplesByBookingId(bookingId);
+        return ResponseEntity.ok(bookingSampleDtos);
     }
 }
